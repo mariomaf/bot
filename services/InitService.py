@@ -1,8 +1,9 @@
 import services.TokenService as TokenService
 import services.TradingPairService as TradingPairService
-from services.TradingPairService import tradingPairList
+import services.ProtocolService as ProtocolService
 
 def InitialiseBot():
 
     TokenService.getTokens()
     TradingPairService.FetchTradingPairs()
+    ProtocolService.getProtocols()

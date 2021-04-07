@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+    {% block content %}
+<div>
+<h1>PROTOCOLS</h1>
+<br><br>
+<table>
+    <tr><td>Protocol Name</td></tr>
+    {% for protocol in protocolList %}
+    <tr><td>{{ protocol.name }}</td></tr>
+     {%  endfor %}
+</table>
+
+</div>
+    {% endblock content %}
