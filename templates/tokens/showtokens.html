@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+    {% block content %}
+<div>
+<h1>TOKENS</h1>
+<br><br>
+<table>
+    <tr><td>Token</td><td>Name</td><td>Address</td></tr>
+    {% for token in tokenList %}
+    <tr><td>{{ token.name }}</td><td>{{ token.ticker }}</td><td>{{ token.address }}</td><td>{{ token.decimals }}</td></tr>
+     {%  endfor %}
+</table>
+
+</div>
+    {% endblock content %}
