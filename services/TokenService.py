@@ -12,3 +12,15 @@ def getTokens():
     # create list of token objects
     for key, value in data['tokens'].items():
         tokenList.append(token.Token(value['name'], value['symbol'], value['address'], value['decimals']))
+
+# Get full tokenlist
+def getTokenList():
+    return tokenList
+
+# Get the specific ticker based on address
+def getTicker(address):
+    # Find dictionary matching value in list
+    for token in tokenList:
+        if token.address == address:
+            ticker = token.ticker
+    return ticker

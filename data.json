@@ -1,0 +1,32 @@
+[
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 97.54463699029274,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-05T23:28:54.483202"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 85.79099053060308,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-08T21:37:40.660064"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 87.14758172535534,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-08T21:52:50.314088"
+    }
+]
