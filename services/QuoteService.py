@@ -2,14 +2,19 @@ from services.TradingPairService import tradingPairList
 import entity.quoteRequest, requests, json
 import entity.quoteResponse
 import services.TokenService
+from pathlib import Path
+import services.InitService as InitService
 
 
 def ScheduledQuoteRequest():
-
     # Create for each of the pairs a quoteRequest Entity and add to quoteRequestList
     quoteRequestList = []
     for tradingPair in tradingPairList:
-        quoteRequest = entity.quoteRequest.QuoteRequest(tradingPair.get_baseToken(), tradingPair.get_swapToken(), 1, tradingPair.get_pathPreferred(), tradingPair.get_baseTokenAddress(), tradingPair.get_swapTokenAddress(), tradingPair.get_pathPreferred())
+        quoteRequest = entity.quoteRequest.QuoteRequest(tradingPair.get_baseToken(), tradingPair.get_swapToken(), 1,
+                                                        tradingPair.get_pathPreferred(),
+                                                        tradingPair.get_baseTokenAddress(),
+                                                        tradingPair.get_swapTokenAddress(),
+                                                        tradingPair.get_pathPreferred())
         quoteRequestList.append(quoteRequest)
     getQuotes(quoteRequestList)
 
@@ -26,7 +31,6 @@ def getQuotes(quoteRequestList):
             r = requests.get(requestUrl)
             if r.status_code == 200:
                 quoteResponse = json.loads(r.content)
-                print(quoteResponse)
                 quoteResponseList.append(convertQuoteResponseReceived(quoteResponse, 'pathfinder1inch'))
             if r.status_code == 500:
                 # TODO: implement proper exception logging
@@ -35,6 +39,7 @@ def getQuotes(quoteRequestList):
                 # TODO: implement proper exception logging
                 print("Exception (400) while fetching quote for protocol " + protocol.name)
     return quoteResponseList
+
 
 # Function that converts the QuoteResponseDTO into a generic QuoteResponse Object
 def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
@@ -48,31 +53,52 @@ def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
         fromTokenAmount = 1
         toTokenAmount = int(quoteResponseDTO['bestResult']['toTokenAmount']) / 1000000000000000000
         path = quoteResponseDTO['bestResult']['routes'][0]['subRoutes'][0][0]['market']['name']
-        quoteResponseEntity = entity.quoteResponse.QuoteResponse(fromSymbol, toSymbol, fromTokenAmount, toTokenAmount, path, fromAddress, toAddress)
+        quoteResponseEntity = entity.quoteResponse.QuoteResponse(fromSymbol, toSymbol, fromTokenAmount, toTokenAmount,
+                                                                 path, fromAddress, toAddress)
         write_json(quoteResponseEntity)
     return quoteResponseEntity
 
+
 # function to add a quote to the JSON with historical quotes
 # TODO make this a dynamic filename based on trade pair and path combination
-def write_json(quoteResponseEntity, filename='data.json', filename2='quotesReceived2.json'):
+def write_json(quoteResponseEntity, filename=InitService.quote_file_location):
     # First append the new quotes to the history of quotes
-    quoteList = fetchQuoteResponse()
+    quoteList = fetchQuoteResponse(InitService.quote_file_location)
     # now append the new quote
     quoteList = addQuoteToList(quoteList, quoteResponseEntity)
     # now convert from quote entity list to JSON object
     quoteJSON = json.dumps(quoteList, ensure_ascii=False, default=lambda o: o.__dict__,
-               sort_keys=False, indent=4)
-    with open(filename, 'w') as json_file:
+                           sort_keys=False, indent=4)
+    with open(InitService.getQuoteFileLocation(), 'w+') as json_file:
         json_file.write(quoteJSON + '\n')
 
-def fetchQuoteResponse(filename='data.json'):
+
+def checkIfFileExists(filename):
+    my_file = Path(filename)
+    if my_file.is_file():
+        return True
+    else:
+        return False
+
+
+def fetchRecentQuotes(number):
+    quoteList = list(reversed(fetchQuoteResponse(InitService.quote_file_location)[-number:]))
+    return quoteList
+
+
+def fetchQuoteResponse(filename):
     # TODO: solution for an empty file
     # TODO: solution for filename as input
-    with open(filename) as json_file:
-        JSONFromFile = json.load(json_file)
-        # create list of quotes from json file
-        quoteList = convertToList(JSONFromFile)
+    if checkIfFileExists(filename):
+        with open(filename) as json_file:
+            JSONFromFile = json.load(json_file)
+            # create list of quotes from json file
+            quoteList = convertToList(JSONFromFile)
+            return quoteList
+    else:
+        quoteList = []
         return quoteList
+
 
 # function that converts JSON with quotesReceived into list of quote entity objects
 def convertToList(quoteJSON):
@@ -85,6 +111,7 @@ def convertToList(quoteJSON):
         # now add the entity object to the list
         quoteList.append(quoteToAdd)
     return quoteList
+
 
 # function to add a new quote to an existing List of Quote Objects
 def addQuoteToList(quoteList, quoteResponseEntity):

@@ -26,5 +26,10 @@ def fetchQuotes():
     quoteService.ScheduledQuoteRequest()
     return render_template("index.html")
 
+# This API
+@app.route('/quote')
+def quotes():
+    return render_template("quote.html", quoteList = quoteService.fetchRecentQuotes(5))
+
 if __name__ == '__main__':
     app.run()

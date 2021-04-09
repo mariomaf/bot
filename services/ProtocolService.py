@@ -3,6 +3,7 @@ import entity.protocol
 
 protocolList = []
 
+
 def getProtocols():
     # fetch all protocols
     r = requests.get('https://api.1inch.exchange/v3.0/56/protocols')

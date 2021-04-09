@@ -2,6 +2,30 @@
 
     {% block content %}
 <div>
-Click on the menu items.
+    <h2>Bot Trading Dashboard</h2><br><br>
+<table>
+    <tr>
+        <td>Trading Pair</td>
+        <td><< PAIR >></td>
+    </tr>
+    <tr>
+        <td>Actual price</td>
+        <td><< PRICE >> << ACTUALISATION UTC >></td>
+    </tr>
+    <tr>
+        <td>Outstanding virtual buy orders</td>
+        <td><<Outstanding buy orders>> </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Last buy order cycle time : << CYCLE TIME >></td>
+        <td>Last quote actualisation time : << ACTUALISATION TIME >></td>
+    </tr>
+</table>
+
+
 </div>
     {% endblock content %}

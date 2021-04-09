@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div>
+        <h2>Recent quotes</h2><br>
+        <h3>Trading Pair: {{ quoteList[0]['fromToken'] + quoteList[0]['toToken'] }}</h3>
+        <table>
+            <tr>
+                <td><strong>Datime</strong></td>
+                <td><strong>Price</strong></td>
+            </tr>
+            {% for quote in quoteList %}
+                <tr>
+                    <td>{{ quote['dateTimeStamp'] }}</td>
+                    <td>{{ quote['toAmount'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock content %}
