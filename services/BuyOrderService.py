@@ -64,6 +64,28 @@ def fetchBuyOrderList():
         return buyOrderList
 
 def ConvertToList(BuyOrderListDTO):
-    print(BuyOrderListDTO)
     buyOrderList = []
+    for BuyOrderListPairDTO in BuyOrderListDTO:
+        for key in BuyOrderListPairDTO.keys():
+            pair = key
+            # now iterate through the buy orders and convert all the buy orders to a buy order entity which will be added to the list
+            outStandingBuyOrderPairList = []
+            for outStandingBuyOrderDTO in BuyOrderListPairDTO[pair]:
+                # Create a buy order entity
+                buyOrder = entity.buyOrder.BuyOrder(outStandingBuyOrderDTO["baseToken"],
+                                                    outStandingBuyOrderDTO["swapToken"],
+                                                    outStandingBuyOrderDTO["buyprice"],
+                                                    outStandingBuyOrderDTO["amount"],
+                                                    outStandingBuyOrderDTO["amountSwapped"],
+                                                    outStandingBuyOrderDTO["lastpricequote"],
+                                                    outStandingBuyOrderDTO["distancepercentage"],
+                                                    outStandingBuyOrderDTO["dateTimeStamp"])
+                outStandingBuyOrderPairList.append(buyOrder)
+
+            # now add the outStandingBuyOrderPairList to the buyOrderList (which will include the buy orders for all pairs)
+            pairToAdd = {}
+            pairToAdd[pair] = {}
+            pairToAdd[pair] = outStandingBuyOrderPairList
+            buyOrderList.append(pairToAdd)
+
     return buyOrderList

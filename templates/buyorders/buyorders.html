@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-{{ buyOrderList }}
+
     <div>
         <h2>Recent buyorders</h2><br>
         <h3>Trading Pair: </h3>
@@ -9,13 +9,23 @@
             <tr>
                 <td><strong>BaseToken</strong></td>
                 <td><strong>Swaptoken</strong></td>
+                <td><strong>Amount</strong></td>
+                <td><strong>Amount swapped</strong></td>
                 <td><strong>Price</strong></td>
+                <td><strong>Last Price Quote</strong></td>
+                <td><strong>Distance to last price quote</strong></td>
+                <td><strong>Date time stamp</strong></td>
             </tr>
-            {% for buyOrder in buyOrderList %}
+            {% for buyOrder in buyOrderList[0]["BTSBUSD"] %}
                 <tr>
                     <td>{{ buyOrder['baseToken'] }}</td>
                     <td>{{ buyOrder['swapToken'] }}</td>
+                    <td>{{ buyOrder['amount'] }}</td>
+                    <td>{{ buyOrder['amountSwapped'] }}</td>
                     <td>{{ buyOrder['buyprice'] }}</td>
+                    <td>{{ buyOrder['lastpricequote'] }}</td>
+                    <td>{{ buyOrder['distancepercentage'] }}</td>
+                    <td>{{ buyOrder['dateTimeStamp'] }}</td>
                 </tr>
             {% endfor %}
         </table>
