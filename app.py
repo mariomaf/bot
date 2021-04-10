@@ -4,6 +4,8 @@ from services.TokenService import tokenList
 from services.ProtocolService import protocolList
 import services.QuoteService as quoteService
 import services.BuyOrderService as buyOrderService
+import threading
+import time
 
 app = Flask(__name__)
 InitService.InitialiseBot()
@@ -43,6 +45,16 @@ def buyorders():
 def placeVirtualBuyOrders():
     buyOrderService.placeVirtualBuyorders()
     return render_template("index.html")
+
+# TODO : Move this to the initialise service
+class BackgroundTasks(threading.Thread):
+    def run(self,*args,**kwargs):
+        while True:
+            quoteService.ScheduledQuoteRequest()
+            time.sleep(30)
+
+t = BackgroundTasks()
+t.start()
 
 if __name__ == '__main__':
     app.run()
