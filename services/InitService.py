@@ -4,6 +4,7 @@ import services.ProtocolService as ProtocolService
 import json
 
 quote_file_location = ''
+buy_order_file_location = ''
 
 
 def InitialiseBot():
@@ -18,7 +19,12 @@ def ReadConfigFile(filename="config.json"):
         config = json.load(json_file)
     global quote_file_location
     quote_file_location = config["quote_file_location"]
+    global buy_order_file_location
+    buy_order_file_location = config["buy_orders_file_location"]
 
 
 def getQuoteFileLocation():
     return quote_file_location
+
+def getBuyOrderFileLocation():
+    return buy_order_file_location

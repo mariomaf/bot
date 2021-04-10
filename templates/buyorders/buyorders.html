@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{{ buyOrderList }}
+    <div>
+        <h2>Recent buyorders</h2><br>
+        <h3>Trading Pair: </h3>
+        <table>
+            <tr>
+                <td><strong>BaseToken</strong></td>
+                <td><strong>Swaptoken</strong></td>
+                <td><strong>Price</strong></td>
+            </tr>
+            {% for buyOrder in buyOrderList %}
+                <tr>
+                    <td>{{ buyOrder['baseToken'] }}</td>
+                    <td>{{ buyOrder['swapToken'] }}</td>
+                    <td>{{ buyOrder['buyprice'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock content %}

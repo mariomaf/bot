@@ -1,4 +1,4 @@
-from services.TradingPairService import tradingPairList
+import services.TradingPairService as tradingPairService
 import entity.quoteRequest, requests, json
 import entity.quoteResponse
 import services.TokenService
@@ -9,6 +9,7 @@ import services.InitService as InitService
 def ScheduledQuoteRequest():
     # Create for each of the pairs a quoteRequest Entity and add to quoteRequestList
     quoteRequestList = []
+    tradingPairList = tradingPairService.FetchTradingPairs()
     for tradingPair in tradingPairList:
         quoteRequest = entity.quoteRequest.QuoteRequest(tradingPair.get_baseToken(), tradingPair.get_swapToken(), 1,
                                                         tradingPair.get_pathPreferred(),
@@ -82,13 +83,13 @@ def checkIfFileExists(filename):
 
 
 def fetchRecentQuotes(number):
+    # TODO : if the list grows overtime -number might be getting slower, then first reverse the list and then take the first 5 elements
     quoteList = list(reversed(fetchQuoteResponse(InitService.quote_file_location)[-number:]))
     return quoteList
 
 
 def fetchQuoteResponse(filename):
     # TODO: solution for an empty file
-    # TODO: solution for filename as input
     if checkIfFileExists(filename):
         with open(filename) as json_file:
             JSONFromFile = json.load(json_file)

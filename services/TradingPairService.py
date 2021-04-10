@@ -3,6 +3,7 @@ import entity.tradingPair
 
 tradingPairList = []
 
+
 def FetchTradingPairs():
     # Fetch a list of trading pairs for which quotes should be fetched
     with open('tradingpairs.json') as json_file:
@@ -11,6 +12,7 @@ def FetchTradingPairs():
         return tradingPairList
 
 def ConvertToList(tradingPairJSON):
+    tradingPairList = []
     for tradingPairFromJSON in tradingPairJSON:
         # convert each trading pair to a trading pair entity object
         tradingPairToAdd = entity.tradingPair.TradingPair(tradingPairFromJSON["baseToken"],
