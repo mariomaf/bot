@@ -7,6 +7,7 @@ import services.BackGroundTaskService as backGroundService
 quote_file_location = ''
 buy_order_file_location = ''
 quote_interval = ''
+quote_history_count = ''
 
 
 def InitialiseBot():
@@ -26,6 +27,9 @@ def ReadConfigFile(filename="config.json"):
     buy_order_file_location = config["buy_orders_file_location"]
     global quote_interval
     quote_interval = config["quote_interval"]
+    global quote_history_count
+    quote_history_count = config["quote_history_count"]
+
 
 
 def getQuoteFileLocation():
@@ -36,3 +40,6 @@ def getBuyOrderFileLocation():
 
 def getQuoteInterval():
     return quote_interval
+
+def getQuoteHistoryCount():
+    return quote_history_count

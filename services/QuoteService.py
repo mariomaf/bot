@@ -117,5 +117,6 @@ def convertToList(quoteJSON):
 # function to add a new quote to an existing List of Quote Objects
 def addQuoteToList(quoteList, quoteResponseEntity):
     # append the quote entity object to the quoteList
+    quoteList = quoteList[-InitService.getQuoteHistoryCount():]
     quoteList.append(quoteResponseEntity)
     return quoteList
