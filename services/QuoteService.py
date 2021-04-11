@@ -62,7 +62,7 @@ def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
 
 # function to add a quote to the JSON with historical quotes
 # TODO make this a dynamic filename based on trade pair and path combination
-def write_json(quoteResponseEntity, filename=InitService.quote_file_location):
+def write_json(quoteResponseEntity):
     # First append the new quotes to the history of quotes
     quoteList = fetchQuoteResponse(InitService.quote_file_location)
     # now append the new quote

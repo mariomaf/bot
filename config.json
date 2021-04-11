@@ -1,4 +1,6 @@
 {
   "quote_file_location" : "quotes_received.json",
-  "buy_orders_file_location" : "data_buyorders.json"
+  "buy_orders_file_location" : "data_buyorders.json",
+  "quote_interval" : 30,
+  "buy_order_interval": 900
 }
