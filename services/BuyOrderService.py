@@ -4,6 +4,7 @@ import entity.buyOrder
 import json
 import services.InitService as InitService
 
+
 # This function is triggered via an API by a scheduler in order to calculate the buy orders based on the pair settings
 def placeVirtualBuyorders():
     # Fetch a list of trading pairs for which quotes should be fetched
@@ -30,7 +31,7 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
 
     buyOrderList = []
     minimumDistancePercentage = 2
-    #quotedToAmount = float(recentQuoteList[0]["toAmount"])
+    # quotedToAmount = float(recentQuoteList[0]["toAmount"])
     quotedToAmount = [o.toAmount for o in recentQuoteList]
     for x in range(0, tradingPair.maxOutstandingBuyOrders):
         # TODO minimumDistancePercentage move to tradingPair entity
@@ -42,7 +43,7 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
         # In the loop this should chance per loop
         buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,
                                             tradingPair.swapToken,
-                                            str(round(buyPrice,5)),
+                                            str(round(buyPrice, 5)),
                                             amount,
                                             str(round(amountSwapped, 5)),
                                             str(round(quotedToAmount[0], 5)),
@@ -51,17 +52,20 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
 
     return buyOrderList
 
-def write_json(outstandingBuyOrderList, filename=InitService.getBuyOrderFileLocation()):
+
+def write_json(outstandingBuyOrderList):
     buyOrderListDTO = json.dumps(outstandingBuyOrderList, ensure_ascii=False, default=lambda o: o.__dict__,
-               sort_keys=False, indent=4)
+                                 sort_keys=False, indent=4)
     with open(InitService.getBuyOrderFileLocation(), 'w') as json_file:
         json_file.write(buyOrderListDTO + '\n')
+
 
 def fetchBuyOrderList():
     with open('data_buyorders.json') as json_file:
         JSONFromFile = json.load(json_file)
         buyOrderList = ConvertToList(JSONFromFile)
         return buyOrderList
+
 
 def ConvertToList(BuyOrderListDTO):
     buyOrderList = []

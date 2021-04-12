@@ -1,5 +1,9 @@
 import entity.backGroundTasks
 
 def startBackGroundTasks():
-    t = entity.backGroundTasks.BackgroundTasks()
+    q = entity.backGroundTasks.QuoteScheduler()
+    q.start()
+
+    t = entity.backGroundTasks.BuyOrderScheduler()
     t.start()
+
