@@ -1,28 +1,29 @@
 {% extends 'layout.html' %}
 
     {% block content %}
+
 <div>
     <h2>Bot Trading Dashboard</h2><br><br>
 <table>
     <tr>
         <td>Trading Pair</td>
-        <td><< PAIR >></td>
+        <td>{{ dashBoardData["trading_pairs"][0]["swapToken"] }} - {{ dashBoardData["trading_pairs"][0]["baseToken"] }}</td>
     </tr>
     <tr>
         <td>Actual price</td>
-        <td><< PRICE >> << ACTUALISATION UTC >></td>
+        <td>{{ dashBoardData["last_quotes"][0]["toAmount"] }}</td>
     </tr>
     <tr>
         <td>Outstanding virtual buy orders</td>
-        <td><<Outstanding buy orders>> </td>
+        <td>{{ dashBoardData["buy_orders"][0]["BTSBUSD"]|length }}</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
+        <td>Last buy order cycle time</td>
+        <td>{{ dashBoardData["buy_orders"][0]["BTSBUSD"][0]["dateTimeStamp"] }}</td>
     </tr>
     <tr>
-        <td>Last buy order cycle time : << CYCLE TIME >></td>
-        <td>Last quote actualisation time : << ACTUALISATION TIME >></td>
+        <td>Last quote actualisation time</td>
+        <td>{{ dashBoardData["last_quotes"][0]["dateTimeStamp"] }}</td>
     </tr>
 </table>
 

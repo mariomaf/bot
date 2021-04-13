@@ -1,6 +1,8 @@
 import services.TokenService as TokenService
 import services.TradingPairService as TradingPairService
 import services.ProtocolService as ProtocolService
+import services.BuyOrderService as BuyOrderService
+import services.QuoteService as QuoteService
 import json
 import services.BackGroundTaskService as backGroundService
 
@@ -37,7 +39,6 @@ def ReadConfigFile(filename="config.json"):
     trading_pairs_file_location = config["trading_pairs_file_location"]
 
 
-
 def getQuoteFileLocation():
     return quote_file_location
 
@@ -55,3 +56,16 @@ def getBuyOrderInterval():
 
 def getTradingPairsFileLocation():
     return trading_pairs_file_location
+
+def getDashBoardFigures():
+    dashBoardFigures = {"buy_order_interval" : buy_order_interval,
+                        "quote_interval" : quote_interval,
+                        "quote_history_count" : quote_history_count,
+                        "quote_file_location" : quote_file_location,
+                        "buy_order_file_location" : buy_order_file_location,
+                        "quote_history_count" : quote_history_count,
+                        "trading_pairs_file_location" : trading_pairs_file_location,
+                        "trading_pairs" : TradingPairService.FetchTradingPairs(),
+                        "buy_orders" : BuyOrderService.fetchBuyOrderList(),
+                        "last_quotes" : QuoteService.fetchRecentQuotes(1)}
+    return dashBoardFigures

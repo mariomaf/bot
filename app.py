@@ -13,7 +13,7 @@ InitService.InitialiseBot()
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
 
 @app.route('/tokens/')
 def tokens():
