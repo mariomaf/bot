@@ -9,6 +9,7 @@ buy_order_file_location = ''
 quote_interval = ''
 quote_history_count = ''
 buy_order_interval = ''
+trading_pairs_file_location = ''
 
 
 def InitialiseBot():
@@ -32,6 +33,8 @@ def ReadConfigFile(filename="config.json"):
     quote_history_count = config["quote_history_count"]
     global buy_order_interval
     buy_order_interval = config["buy_order_interval"]
+    global trading_pairs_file_location
+    trading_pairs_file_location = config["trading_pairs_file_location"]
 
 
 
@@ -49,3 +52,6 @@ def getQuoteHistoryCount():
 
 def getBuyOrderInterval():
     return buy_order_interval
+
+def getTradingPairsFileLocation():
+    return trading_pairs_file_location

@@ -1,6 +1,7 @@
 {
   "quote_file_location" : "quotes_received.json",
   "buy_orders_file_location" : "data_buyorders.json",
+  "trading_pairs_file_location" :"tradingpairs.json",
   "quote_interval" : 30,
   "buy_order_interval": 300,
   "quote_history_count": 50
