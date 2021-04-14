@@ -12,14 +12,13 @@ def FetchTradingPairs():
         if len(tradingPairList) != 0:
             # TODO: Create logging item
             return tradingPairList
-        # TODO: make tradingpairs.json based on config
         with open(initService.getTradingPairsFileLocation()) as json_file:
             # TODO: Create logging item
             JSONFromFile = json.load(json_file)
             tradingPairList = ConvertToList(JSONFromFile)
             return tradingPairList
     except NameError:
-       print("Log: File 'tradingpairs.json' does not exist")
+       print("Log: File '" + initService.getTradingPairsFileLocation() + "' does not exist")
 
 
 def ConvertToList(tradingPairJSON):
@@ -31,6 +30,7 @@ def ConvertToList(tradingPairJSON):
                                                     tradingPairFromJSON["moonBagPercentage"],
                                                     tradingPairFromJSON["allocationPercentage"],
                                                     tradingPairFromJSON["takeProfitPercentage"],
+                                                    tradingPairFromJSON["minimumDistance"],
                                                     tradingPairFromJSON["minimumOrderSize"],
                                                     tradingPairFromJSON["pathPreferred"],
                                                     tradingPairFromJSON['maxOutstandingBuyOrders'],
@@ -41,3 +41,13 @@ def ConvertToList(tradingPairJSON):
         # now add the entity object to the list
         tradingPairList.append(tradingPairToAdd)
     return tradingPairList
+
+def fetchTradingPairSetting(basetoken, swaptoken, parameterKey):
+    filtered_list = [tradingPair for tradingPair in FetchTradingPairs() if tradingPair.get_baseToken() == basetoken and tradingPair.get_swapToken() == swaptoken]
+    if filtered_list:
+        result = filtered_list[-1]
+    else:
+        result = None
+        # TODO: Add to logging
+        print("The requested pair is not set up")
+    return getattr(result, parameterKey)

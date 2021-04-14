@@ -5,6 +5,7 @@
         "moonBagPercentage": 0,
         "allocationPercentage": 10,
         "takeProfitPercentage": 1,
+        "minimumDistance": 2,
         "minimumOrderSize" : 10,
         "pathPreferred": "PANCAKESWAP",
         "maxOutstandingBuyOrders": 5,

@@ -11,7 +11,6 @@ def placeVirtualBuyorders():
     tradingPairList = tradingPairService.FetchTradingPairs()
     # now loop trough the list of tradingPair objects
     outStandingBuyOrderList = []
-
     for tradingPair in tradingPairList:
         lastQuoteResponses = quoteService.fetchRecentQuotes(1)
         buyOrderPairList = calculateBuyOrderList(lastQuoteResponses, tradingPair)
@@ -34,9 +33,8 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
     # quotedToAmount = float(recentQuoteList[0]["toAmount"])
     quotedToAmount = [o.toAmount for o in recentQuoteList]
     for x in range(0, tradingPair.maxOutstandingBuyOrders):
-        # TODO minimumDistancePercentage move to tradingPair entity
         # TODO calculate free allocation available for the base token
-        pricingFactor = (100 - minimumDistancePercentage) * (1 - (1 + x * 1) / 100)
+        pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
         buyPrice = quotedToAmount[0] * pricingFactor / 100
         amount = 100
         amountSwapped = amount / buyPrice
@@ -61,7 +59,7 @@ def write_json(outstandingBuyOrderList):
 
 
 def fetchBuyOrderList():
-    with open('data_buyorders.json') as json_file:
+    with open(InitService.getBuyOrderFileLocation()) as json_file:
         JSONFromFile = json.load(json_file)
         buyOrderList = ConvertToList(JSONFromFile)
         return buyOrderList

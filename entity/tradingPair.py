@@ -2,12 +2,13 @@ import datetime, json
 
 class TradingPair:
     ''' This is the TradingPair Class '''
-    def __init__(self, baseToken, swapToken, moonBagPercentage, allocationPercentage, takeProfitPercentage, minimumOrderSize, pathPreferred, maxOutstandingBuyOrders, slippage, baseTokenAddress, swapTokenAddress, dateTimeStamp):
+    def __init__(self, baseToken, swapToken, moonBagPercentage, allocationPercentage, takeProfitPercentage, minimumDistance, minimumOrderSize, pathPreferred, maxOutstandingBuyOrders, slippage, baseTokenAddress, swapTokenAddress, dateTimeStamp):
         self.baseToken = baseToken
         self.swapToken = swapToken
         self.moonBagPercentage = moonBagPercentage
         self.allocationPercentage = allocationPercentage
         self.takeProfitPercentage = takeProfitPercentage
+        self.minimumDistance = minimumDistance
         self.minimumOrderSize = minimumOrderSize
         self.pathPreferred = pathPreferred
         self.maxOutstandingBuyOrders = maxOutstandingBuyOrders
@@ -50,4 +51,7 @@ class TradingPair:
 
     def get_dateTimeStamp(self):
         return self.dateTimeStamp
+
+    def get_minimumDistance(self):
+        return self.minimumDistance
 
