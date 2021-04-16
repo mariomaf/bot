@@ -1,12 +1,15 @@
 import services.TradingPairService as tradingPairService
+import services.BuyOrderService as buyOrderService
 import entity.quoteRequest, requests, json
 import entity.quoteResponse
 import services.TokenService
 from pathlib import Path
 import services.InitService as InitService
+import datetime
 
 
 def ScheduledQuoteRequest():
+    print(datetime.datetime.now().isoformat() + " ##### QuoteService: Renewing quotes #####")
     # Create for each of the pairs a quoteRequest Entity and add to quoteRequestList
     quoteRequestList = []
     tradingPairList = tradingPairService.FetchTradingPairs()
@@ -17,7 +20,8 @@ def ScheduledQuoteRequest():
                                                         tradingPair.get_swapTokenAddress(),
                                                         tradingPair.get_pathPreferred())
         quoteRequestList.append(quoteRequest)
-    getQuotes(quoteRequestList)
+    buyOrderService.checkBuyOrdersForExecution(getQuotes(quoteRequestList))
+    print(datetime.datetime.now().isoformat() + " ##### QuoteService: Quotes succesfully renewed #####")
 
 
 def getQuotes(quoteRequestList):

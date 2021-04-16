@@ -3,7 +3,7 @@ import services.TradingPairService as TradingPairService
 import services.ProtocolService as ProtocolService
 import services.BuyOrderService as BuyOrderService
 import services.QuoteService as QuoteService
-import json
+import json, datetime
 import services.BackGroundTaskService as backGroundService
 
 quote_file_location = ''
@@ -15,11 +15,13 @@ trading_pairs_file_location = ''
 
 
 def InitialiseBot():
+    print(datetime.datetime.now().isoformat() + " ##### InitService: Initialising Bot #####")
     ReadConfigFile()
     TokenService.getTokens()
     TradingPairService.FetchTradingPairs()
     ProtocolService.getProtocols()
     backGroundService.startBackGroundTasks()
+    print(datetime.datetime.now().isoformat() + " ##### InitService: Bot is initialised #####")
 
 
 def ReadConfigFile(filename="config.json"):

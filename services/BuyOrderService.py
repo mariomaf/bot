@@ -1,12 +1,13 @@
 import services.TradingPairService as tradingPairService
 import services.QuoteService as quoteService
 import entity.buyOrder
-import json
+import json, datetime
 import services.InitService as InitService
 
 
 # This function is triggered via an API by a scheduler in order to calculate the buy orders based on the pair settings
 def placeVirtualBuyorders():
+    print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Actualising BuyOrderList #####")
     # Fetch a list of trading pairs for which quotes should be fetched
     tradingPairList = tradingPairService.FetchTradingPairs()
     # now loop trough the list of tradingPair objects
@@ -21,6 +22,7 @@ def placeVirtualBuyorders():
         outStandingBuyOrderList.append(pairToAdd)
     # Now actualise the buyOrderList JSON file
     write_json(outStandingBuyOrderList)
+    print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: BuyOrderList actualised #####")
     # TODO: Return full list, not only actualised ones but also ones for which no pair is active
     return outStandingBuyOrderList
 
@@ -70,7 +72,7 @@ def ConvertToList(BuyOrderListDTO):
     for BuyOrderListPairDTO in BuyOrderListDTO:
         for key in BuyOrderListPairDTO.keys():
             pair = key
-            # now iterate through the buy orders and convert all the buy orders to a buy order entity which will be added to the list
+            # Now iterate through the buy orders and convert all the buy orders to a buy order entity which will be added to the list
             outStandingBuyOrderPairList = []
             for outStandingBuyOrderDTO in BuyOrderListPairDTO[pair]:
                 # Create a buy order entity
@@ -91,3 +93,21 @@ def ConvertToList(BuyOrderListDTO):
             buyOrderList.append(pairToAdd)
 
     return buyOrderList
+
+def checkBuyOrdersForExecution(quoteResponseList):
+    # TODO: Make pair dynamic and respect the pair in below loop
+    print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Checking if virtual buy orders to swap #####")
+    # Validate if an outstanding virtual buy order is greater then recent quote
+    for quoteResponse in quoteResponseList:
+        for buyOrderListPair in fetchBuyOrderList():
+            for buyOrderList in buyOrderListPair.values():
+                for buyOrder in buyOrderList:
+                    if float(buyOrder.buyprice) > float(quoteResponse.toAmount):
+                        print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: !!HIT!! Quote price [[" + str(
+                            quoteResponse.toAmount) + "]] is below Virtual Buy Order price [[" + str(
+                            buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
+                    else:
+                        print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Quote price [[" + str(
+                            quoteResponse.toAmount) + "]] is above Virtual Buy Order price [[" + str(
+                            buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
+
