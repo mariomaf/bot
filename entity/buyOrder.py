@@ -1,6 +1,6 @@
 import json, datetime
 
-# Add max buy price as parameter
+# TODO: Add max buy price as parameter
 class BuyOrder:
     ''' This is the BuyOrder Class '''
     def __init__(self, baseToken, swapToken, buyprice, amount, amountSwapped, lastpricequote, distancepercentage, dateTimeStamp=None):

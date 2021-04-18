@@ -3,6 +3,7 @@ import services.QuoteService as quoteService
 import entity.buyOrder
 import json, datetime
 import services.InitService as InitService
+import services.SellOrderService as SellOrderService
 
 
 # This function is triggered via an API by a scheduler in order to calculate the buy orders based on the pair settings
@@ -106,8 +107,10 @@ def checkBuyOrdersForExecution(quoteResponseList):
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: !!HIT!! Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is below Virtual Buy Order price [[" + str(
                             buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
+                        SellOrderService.swapToSellOrder(buyOrder)
                     else:
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is above Virtual Buy Order price [[" + str(
                             buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
+
 

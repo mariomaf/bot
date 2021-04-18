@@ -65,7 +65,6 @@ def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
 
 
 # function to add a quote to the JSON with historical quotes
-# TODO make this a dynamic filename based on trade pair and path combination
 def write_json(quoteResponseEntity):
     # First append the new quotes to the history of quotes
     quoteList = fetchQuoteResponse(InitService.quote_file_location)
@@ -77,7 +76,7 @@ def write_json(quoteResponseEntity):
     with open(InitService.getQuoteFileLocation(), 'w+') as json_file:
         json_file.write(quoteJSON + '\n')
 
-
+# TODO : Make this a common service
 def checkIfFileExists(filename):
     my_file = Path(filename)
     if my_file.is_file():
@@ -93,7 +92,6 @@ def fetchRecentQuotes(number):
 
 
 def fetchQuoteResponse(filename):
-    # TODO: solution for an empty file
     if checkIfFileExists(filename):
         with open(filename) as json_file:
             JSONFromFile = json.load(json_file)
