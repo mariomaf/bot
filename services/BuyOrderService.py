@@ -101,16 +101,24 @@ def checkBuyOrdersForExecution(quoteResponseList):
     # Validate if an outstanding virtual buy order is greater then recent quote
     for quoteResponse in quoteResponseList:
         for buyOrderListPair in fetchBuyOrderList():
-            for buyOrderList in buyOrderListPair.values():
-                for buyOrder in buyOrderList:
+            for pair, buyOrderList in buyOrderListPair.items():     # pair = key; buyOrderList = value
+                modifiedBuyOrderlist = []
+                for index, buyOrder in enumerate(buyOrderList):
                     if float(buyOrder.buyprice) > float(quoteResponse.toAmount):
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: !!HIT!! Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is below Virtual Buy Order price [[" + str(
-                            buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
+                            buyOrder.buyprice) + "]] for pair <" + pair + ">. #####")
                         SellOrderService.swapToSellOrder(buyOrder)
                     else:
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is above Virtual Buy Order price [[" + str(
-                            buyOrder.buyprice) + "]] for pair <BTSBUSD>. #####")
-
-
+                            buyOrder.buyprice) + "]] for pair <" + pair + ">. #####")
+                        # BuyOrder remains valid therefore appended to the ModifiedBuyOrderList
+                        modifiedBuyOrderlist.append(buyOrder)
+                # Now replace the buyOrderList with the modifiedBuyOrderList
+                buyOrderListPair[pair] = modifiedBuyOrderlist
+                jsonStr = json.dumps(buyOrderListPair, ensure_ascii=False, default=lambda o: o.__dict__,
+                                     sort_keys=False, indent=4)
+            newOutStandingBuyOrderList = []
+            newOutStandingBuyOrderList.append(buyOrderListPair)
+        write_json(newOutStandingBuyOrderList)
