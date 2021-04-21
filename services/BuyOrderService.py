@@ -96,7 +96,6 @@ def ConvertToList(BuyOrderListDTO):
     return buyOrderList
 
 def checkBuyOrdersForExecution(quoteResponseList):
-    # TODO: Make pair dynamic and respect the pair in below loop
     print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Checking if virtual buy orders to swap #####")
     # Validate if an outstanding virtual buy order is greater then recent quote
     for quoteResponse in quoteResponseList:
@@ -117,6 +116,7 @@ def checkBuyOrdersForExecution(quoteResponseList):
                         modifiedBuyOrderlist.append(buyOrder)
                 # Now replace the buyOrderList with the modifiedBuyOrderList
                 buyOrderListPair[pair] = modifiedBuyOrderlist
+                # TODO: Can be removed? Next line?
                 jsonStr = json.dumps(buyOrderListPair, ensure_ascii=False, default=lambda o: o.__dict__,
                                      sort_keys=False, indent=4)
             newOutStandingBuyOrderList = []

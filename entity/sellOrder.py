@@ -9,7 +9,7 @@ class SellOrder:
         self.buyprice = buyprice                            # This is the price for which the amount was swapped before
         self.sellprice = sellprice                          # This is the sell price trigger
         self.amount = amount                                # This is the amount expressed in the baseToken, being the amountSwapped from a buyOrder
-        self.amountSwapped = amountSwapped
+        self.amountSwapped = amountSwapped                  # This is the amount in the swap token (amount * sell price)
         self.expectedprofit = expectedprofit
         self.takeprofitpercentage = takeprofitpercentage
         self.dateTimeStamp = dateTimeStamp if dateTimeStamp is not None else datetime.datetime.now().isoformat()

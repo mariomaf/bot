@@ -3,7 +3,6 @@ import services.TradingPairService as TradingPairService
 import services.ProtocolService as ProtocolService
 import services.BuyOrderService as BuyOrderService
 import services.QuoteService as QuoteService
-import services.SellOrderService as SellOrderService
 import json, datetime
 import services.BackGroundTaskService as backGroundService
 
@@ -14,6 +13,8 @@ quote_interval = ''
 quote_history_count = ''
 buy_order_interval = ''
 trading_pairs_file_location = ''
+results_file_location = ''
+closedswaps_file_location = ''
 
 
 def InitialiseBot():
@@ -43,6 +44,10 @@ def ReadConfigFile(filename="config.json"):
     trading_pairs_file_location = config["trading_pairs_file_location"]
     global sell_orders_file_location
     sell_orders_file_location = config["sell_orders_file_location"]
+    global results_file_location
+    results_file_location = config["results_file_location"]
+    global closed_swaps_file_location
+    closed_swaps_file_location = config["closed_swaps_file_location"]
 
 
 def getQuoteFileLocation():
@@ -66,7 +71,14 @@ def getTradingPairsFileLocation():
 def getSellOrdersFileLocation():
     return sell_orders_file_location
 
-# TODO: Add Sell Order File Location to DashBoardFigures
+def getResultsFileLocation():
+    return results_file_location
+
+def getClosedSwapsFileLocation():
+    return closed_swaps_file_location
+
+
+# TODO: Add Sell Order File Location, Results File Location, ClosedSwaps file location to DashBoardFigures
 def getDashBoardFigures():
     dashBoardFigures = {"buy_order_interval" : buy_order_interval,
                         "quote_interval" : quote_interval,

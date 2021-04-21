@@ -1,5 +1,6 @@
 import services.TradingPairService as tradingPairService
 import services.BuyOrderService as buyOrderService
+import services.SellOrderService as sellOrderService
 import entity.quoteRequest, requests, json
 import entity.quoteResponse
 import services.TokenService
@@ -20,8 +21,10 @@ def ScheduledQuoteRequest():
                                                         tradingPair.get_swapTokenAddress(),
                                                         tradingPair.get_pathPreferred())
         quoteRequestList.append(quoteRequest)
-    buyOrderService.checkBuyOrdersForExecution(getQuotes(quoteRequestList))
-    print(datetime.datetime.now().isoformat() + " ##### QuoteService: Quotes succesfully renewed #####")
+    quoteResponseList = getQuotes(quoteRequestList)
+    buyOrderService.checkBuyOrdersForExecution(quoteResponseList)
+    sellOrderService.fetchSellOrdersToSwap(quoteResponseList)
+    print(datetime.datetime.now().isoformat() + " ##### QuoteService: Quotes successfully renewed #####")
 
 
 def getQuotes(quoteRequestList):
@@ -66,11 +69,11 @@ def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
 
 # function to add a quote to the JSON with historical quotes
 def write_json(quoteResponseEntity):
-    # First append the new quotes to the history of quotes
+    # First fetch the history of quotes
     quoteList = fetchQuoteResponse(InitService.quote_file_location)
-    # now append the new quote
+    # Now append the new quote
     quoteList = addQuoteToList(quoteList, quoteResponseEntity)
-    # now convert from quote entity list to JSON object
+    # Now convert from quote entity list to JSON object
     quoteJSON = json.dumps(quoteList, ensure_ascii=False, default=lambda o: o.__dict__,
                            sort_keys=False, indent=4)
     with open(InitService.getQuoteFileLocation(), 'w+') as json_file:
