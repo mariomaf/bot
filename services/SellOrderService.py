@@ -2,6 +2,7 @@ import datetime, json
 import entity.sellOrder
 import services.InitService as InitService
 from pathlib import Path
+import services.TradingPairService as tradingPairService
 
 
 def placeVirtualSellOrder():
@@ -12,14 +13,14 @@ def swapToSellOrder(buyOrder):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
     # TODO: fetch takeprofit from tradingpairs.json
     # TODO: also include temporarily the buyorder being swapped and later the actual swapped order details along with the sell order
-    tp = 0.05
+    tp = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
     sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,                  # The swaptoken from buy becomes basetoken
                                         buyOrder.baseToken,                     # The basetoken from buy becomes swaptoken
                                         buyOrder.buyprice,                      #
-                                        float(buyOrder.buyprice) * (1 + tp),    # sell price
+                                        float(buyOrder.buyprice) * (1 + tp / 100),    # sell price
                                         buyOrder.amountSwapped,                 # amount swapped in buy order expressed in base token of sell order
                                         float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp),     # Swapped amount after sell express in swap token
-                                        float(buyOrder.buyprice) * (1 + tp) - float(buyOrder.buyprice),                               # expected profit
+                                        float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),                               # expected profit
                                         tp * 100)            #
     write_json(sellOrder)
 
@@ -90,6 +91,7 @@ def fetchSellOrderList():
 
 def fetchSellOrdersToSwap(quoteResponseList):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Fetch SellOrders to SWAP #####")
+    takeprofit = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
     # Validate if an outstanding virtual sell order is smaller then recent quote
     modifiedSellOrderlist = []
     closedSellOrderList = [] # TODO : REMOVE no longer needed
@@ -98,7 +100,7 @@ def fetchSellOrdersToSwap(quoteResponseList):
             print(sellOrder)
             if float(sellOrder.sellprice) < float(quoteResponse.toAmount):
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: !!HIT!! Quote price [[" + str(
-                    quoteResponse.toAmount) + "]] is higher Virtual Sell Order price [[" + str(
+                    quoteResponse.toAmount) + "]] is higher then Virtual Sell Order price [[" + str(
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
                 closedSellOrderList.append(sellOrder) # TODO : REMOVE no longer needed
                 appendClosedSwapToFile(sellOrder)

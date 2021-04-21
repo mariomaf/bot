@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div>
+        <h2>Recent sell orders</h2><br>
+        <h3>Trading Pair: </h3>
+        <table>
+            <tr>
+                <td><strong>BaseToken</strong></td>
+                <td><strong>Swaptoken</strong></td>
+                <td><strong>Buy price</strong></td>
+                <td><strong>Sell price</strong></td>
+                <td><strong>Amount</strong></td>
+                <td><strong>Amount swapped</strong></td>
+                <td><strong>Expected profit</strong></td>
+                <td><strong>Take profit percentage</strong></td>
+                <td><strong>Date time stamp</strong></td>
+            </tr>
+            {% for sellOrder in sellOrderList %}
+                <tr>
+                    <td>{{ sellOrder['baseToken'] }}</td>
+                    <td>{{ sellOrder['swapToken'] }}</td>
+                    <td>{{ sellOrder['buyprice'] }}</td>
+                    <td>{{ sellOrder['sellprice'] }}</td>
+                    <td>{{ sellOrder['amount'] }}</td>
+                    <td>{{ sellOrder['amountSwapped'] }}</td>
+                    <td>{{ sellOrder['expectedprofit'] }}</td>
+                    <td>{{ sellOrder['takeprofitpercentage'] }}</td>
+                    <td>{{ sellOrder['dateTimeStamp'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock content %}

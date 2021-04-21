@@ -4,6 +4,8 @@ from services.TokenService import tokenList
 from services.ProtocolService import protocolList
 import services.QuoteService as quoteService
 import services.BuyOrderService as buyOrderService
+import services.SellOrderService as sellOrderService
+import services.TradeService as tradeService
 
 
 
@@ -34,10 +36,17 @@ def fetchQuotes():
 def quotes():
     return render_template("quotes/quote.html", quoteList = quoteService.fetchRecentQuotes(5))
 
-# This API
 @app.route('/buyorders')
 def buyorders():
     return render_template("buyorders/buyorders.html", buyOrderList = buyOrderService.fetchBuyOrderList())
+
+@app.route('/sellorders')
+def sellorders():
+    return render_template("sellorders/sellorders.html", sellOrderList = sellOrderService.fetchSellOrderList())
+
+@app.route('/trades')
+def trades():
+    return render_template("trades/trades.html", closedSwaplist = tradeService.fetchClosedTradeList())
 
 # This API can be used by a scheduler to calculate buy positions
 @app.route('/schedule/placevirtualbuyorders')

@@ -4,7 +4,7 @@
         "swapToken": "BTS",
         "moonBagPercentage": 0,
         "allocationPercentage": 10,
-        "takeProfitPercentage": 1,
+        "takeProfitPercentage": 1.5,
         "minimumDistance": -0.5,
         "minimumOrderSize" : 10,
         "pathPreferred": "PANCAKESWAP",

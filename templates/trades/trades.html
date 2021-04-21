@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div>
+        <h2>Closed trades</h2><br>
+        <h3>Trading Pair: </h3>
+        <table>
+            <tr>
+                <td><strong>BaseToken</strong></td>
+                <td><strong>Swaptoken</strong></td>
+                <td><strong>Buy price</strong></td>
+                <td><strong>Sell price</strong></td>
+                <td><strong>Amount</strong></td>
+                <td><strong>Amount swapped</strong></td>
+                <td><strong>Expected profit</strong></td>
+                <td><strong>Take profit percentage</strong></td>
+                <td><strong>Date time stamp</strong></td>
+            </tr>
+            {% for closedSwap in closedSwaplist %}
+                <tr>
+                    <td>{{ closedSwap['baseToken'] }}</td>
+                    <td>{{ closedSwap['swapToken'] }}</td>
+                    <td>{{ closedSwap['buyprice'] }}</td>
+                    <td>{{ closedSwap['sellprice'] }}</td>
+                    <td>{{ closedSwap['amount'] }}</td>
+                    <td>{{ closedSwap['amountSwapped'] }}</td>
+                    <td>{{ closedSwap['expectedprofit'] }}</td>
+                    <td>{{ closedSwap['takeprofitpercentage'] }}</td>
+                    <td>{{ closedSwap['dateTimeStamp'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock content %}
