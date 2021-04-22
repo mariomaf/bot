@@ -19,7 +19,8 @@ def swapToSellOrder(buyOrder):
                                         float(buyOrder.buyprice) * (1 + tp / 100),  # sell price
                                         buyOrder.amountSwapped, # amount swapped in buy order expressed in base token of sell order
                                         float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp / 100),  # Swapped amount after sell expressed in swap token
-                                        float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),   # expected profit
+                                        float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice) * float(buyOrder.amountSwapped), # expected profit
+                                        #float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),   # expected profit
                                         tp)            # Take profit percentage
     write_json(sellOrder)
 
