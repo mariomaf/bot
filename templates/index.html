@@ -18,6 +18,22 @@
         <td>{{ dashBoardData["buy_orders"][0]["BTSBUSD"]|length }}</td>
     </tr>
     <tr>
+        <td>Outstanding virtual sell orders</td>
+        <td>{{ dashBoardData["sell_orders"]|length }}</td>
+    </tr>
+    <tr>
+        <td>Value of outstanding virtual sell orders</td>
+        <td>{{ dashBoardData["sell_orders"]|sum(attribute='amountSwapped') }}</td>
+    </tr>
+    <tr>
+        <td>Closed Trades</td>
+        <td>{{ dashBoardData["closed_trades"]|length }}</td>
+    </tr>
+    <tr>
+        <td>Total profit</td>
+        <td>{{ dashBoardData["closed_trades"]| sum(attribute='expectedprofit') }}</td>
+    </tr>
+    <tr>
         <td>Last buy order cycle time</td>
         <td>{{ dashBoardData["buy_orders"][0]["BTSBUSD"][0]["dateTimeStamp"] }}</td>
     </tr>

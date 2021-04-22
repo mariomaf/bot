@@ -2,6 +2,8 @@ import services.TokenService as TokenService
 import services.TradingPairService as TradingPairService
 import services.ProtocolService as ProtocolService
 import services.BuyOrderService as BuyOrderService
+import services.SellOrderService as SellOrderService
+import services.TradeService as TradeService
 import services.QuoteService as QuoteService
 import json, datetime
 import services.BackGroundTaskService as backGroundService
@@ -89,5 +91,7 @@ def getDashBoardFigures():
                         "trading_pairs_file_location" : trading_pairs_file_location,
                         "trading_pairs" : TradingPairService.FetchTradingPairs(),
                         "buy_orders" : BuyOrderService.fetchBuyOrderList(),
+                        "sell_orders" : SellOrderService.fetchSellOrderList(),
+                        "closed_trades": TradeService.fetchClosedTradeList(),
                         "last_quotes" : QuoteService.fetchRecentQuotes(1)}
     return dashBoardFigures

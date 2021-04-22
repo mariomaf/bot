@@ -1,5 +1,6 @@
 import datetime, json
 
+# TODO: add min and max buy range
 class TradingPair:
     ''' This is the TradingPair Class '''
     def __init__(self, baseToken, swapToken, moonBagPercentage, allocationPercentage, takeProfitPercentage, minimumDistance, minimumOrderSize, pathPreferred, maxOutstandingBuyOrders, slippage, baseTokenAddress, swapTokenAddress, dateTimeStamp):

@@ -1,6 +1,7 @@
 import services.TradingPairService as tradingPairService
 import services.QuoteService as quoteService
 import entity.buyOrder
+import entity.tradingPair
 import json, datetime
 import services.InitService as InitService
 import services.SellOrderService as SellOrderService
@@ -29,6 +30,7 @@ def placeVirtualBuyorders():
 
 
 def calculateBuyOrderList(recentQuoteList, tradingPair):
+    print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Calculate BuyOrderList #####")
     # take the relevant trading pair parameters
 
     buyOrderList = []
@@ -39,7 +41,7 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
         # TODO calculate free allocation available for the base token
         pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
         buyPrice = quotedToAmount[0] * pricingFactor / 100
-        amount = 100
+        amount = tradingPair.get_minimumOrderSize()
         amountSwapped = amount / buyPrice
         # In the loop this should chance per loop
         buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,

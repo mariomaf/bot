@@ -11,17 +11,16 @@ def placeVirtualSellOrder():
 
 def swapToSellOrder(buyOrder):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
-    # TODO: fetch takeprofit from tradingpairs.json
     # TODO: also include temporarily the buyorder being swapped and later the actual swapped order details along with the sell order
     tp = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
-    sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,                  # The swaptoken from buy becomes basetoken
-                                        buyOrder.baseToken,                     # The basetoken from buy becomes swaptoken
-                                        buyOrder.buyprice,                      #
-                                        float(buyOrder.buyprice) * (1 + tp / 100),    # sell price
-                                        buyOrder.amountSwapped,                 # amount swapped in buy order expressed in base token of sell order
-                                        float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp),     # Swapped amount after sell express in swap token
-                                        float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),                               # expected profit
-                                        tp * 100)            #
+    sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,  # The swaptoken from buy becomes basetoken
+                                        buyOrder.baseToken, # The basetoken from buy becomes swaptoken
+                                        buyOrder.buyprice,  # Price for which the amount of basetoken was purchased
+                                        float(buyOrder.buyprice) * (1 + tp / 100),  # sell price
+                                        buyOrder.amountSwapped, # amount swapped in buy order expressed in base token of sell order
+                                        float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp / 100),  # Swapped amount after sell expressed in swap token
+                                        float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),   # expected profit
+                                        tp)            # Take profit percentage
     write_json(sellOrder)
 
 # function to add a sellOrder to the JSON
@@ -94,15 +93,12 @@ def fetchSellOrdersToSwap(quoteResponseList):
     takeprofit = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
     # Validate if an outstanding virtual sell order is smaller then recent quote
     modifiedSellOrderlist = []
-    closedSellOrderList = [] # TODO : REMOVE no longer needed
     for quoteResponse in quoteResponseList:
         for sellOrder in fetchSellOrderList():
-            print(sellOrder)
             if float(sellOrder.sellprice) < float(quoteResponse.toAmount):
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: !!HIT!! Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is higher then Virtual Sell Order price [[" + str(
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
-                closedSellOrderList.append(sellOrder) # TODO : REMOVE no longer needed
                 appendClosedSwapToFile(sellOrder)
             else:
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Quote price [[" + str(
@@ -110,7 +106,6 @@ def fetchSellOrdersToSwap(quoteResponseList):
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
                 # SellOrder remains valid therefore appended to the ModifiedSellOrderList
                 modifiedSellOrderlist.append(sellOrder)
-        print(closedSellOrderList)
         write_json2(modifiedSellOrderlist, InitService.getSellOrdersFileLocation())
         # appendClosedSwapToFile(closedSellOrderList)
 
