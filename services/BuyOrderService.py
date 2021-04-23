@@ -5,6 +5,7 @@ import entity.tradingPair
 import json, datetime
 import services.InitService as InitService
 import services.SellOrderService as SellOrderService
+import services.CommonServices as commonService
 
 
 # This function is triggered via an API by a scheduler in order to calculate the buy orders based on the pair settings
@@ -31,27 +32,24 @@ def placeVirtualBuyorders():
 
 def calculateBuyOrderList(recentQuoteList, tradingPair):
     print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Calculate BuyOrderList #####")
-    # take the relevant trading pair parameters
-
     buyOrderList = []
-    minimumDistancePercentage = 2
-    # quotedToAmount = float(recentQuoteList[0]["toAmount"])
-    quotedToAmount = [o.toAmount for o in recentQuoteList]
-    for x in range(0, tradingPair.maxOutstandingBuyOrders):
-        # TODO calculate free allocation available for the base token
-        pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
-        buyPrice = quotedToAmount[0] * pricingFactor / 100
-        amount = tradingPair.get_minimumOrderSize()
-        amountSwapped = amount / buyPrice
-        # In the loop this should chance per loop
-        buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,
-                                            tradingPair.swapToken,
-                                            str(round(buyPrice, 5)),
-                                            amount,
-                                            str(round(amountSwapped, 5)),
-                                            str(round(quotedToAmount[0], 5)),
-                                            str(round(pricingFactor, 2)))
-        buyOrderList.append(buyOrder)
+    if len(recentQuoteList) != 0:
+        quotedToAmount = [o.toAmount for o in recentQuoteList]
+        for x in range(0, tradingPair.maxOutstandingBuyOrders):
+            # TODO calculate free allocation available for the base token
+            pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
+            buyPrice = quotedToAmount[0] * pricingFactor / 100
+            amount = tradingPair.get_minimumOrderSize()
+            amountSwapped = amount / buyPrice
+            # In the loop this should chance per loop
+            buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,
+                                                tradingPair.swapToken,
+                                                str(round(buyPrice, 5)),
+                                                amount,
+                                                str(round(amountSwapped, 5)),
+                                                str(round(quotedToAmount[0], 5)),
+                                                str(round(pricingFactor, 2)))
+            buyOrderList.append(buyOrder)
 
     return buyOrderList
 
@@ -64,10 +62,12 @@ def write_json(outstandingBuyOrderList):
 
 
 def fetchBuyOrderList():
-    with open(InitService.getBuyOrderFileLocation()) as json_file:
-        JSONFromFile = json.load(json_file)
-        buyOrderList = ConvertToList(JSONFromFile)
-        return buyOrderList
+    filename = InitService.getBuyOrderFileLocation()
+    if commonService.checkIfFileExists(filename):
+        with open(filename) as json_file:
+            JSONFromFile = json.load(json_file)
+            buyOrderList = ConvertToList(JSONFromFile)
+            return buyOrderList
 
 
 def ConvertToList(BuyOrderListDTO):

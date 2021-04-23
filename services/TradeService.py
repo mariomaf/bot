@@ -1,12 +1,18 @@
 import services.InitService as initService
+import services.CommonServices as commonService
 import entity.sellOrder
-import json
+import json, datetime
 
 def fetchClosedTradeList():
-    with open(initService.getClosedSwapsFileLocation()) as json_file:
-        JSONFromFile = json.load(json_file)
-        closedSwapList = convertToList(JSONFromFile)
-        print(closedSwapList)
+    filename = initService.getClosedSwapsFileLocation()
+    if commonService.checkIfFileExists(filename):
+        with open(filename) as json_file:
+            JSONFromFile = json.load(json_file)
+            closedSwapList = convertToList(JSONFromFile)
+            return closedSwapList
+    else:
+        print(datetime.datetime.now().isoformat() + " ##### TradeService: No closed trades found #####")
+        closedSwapList = []
         return closedSwapList
 
 

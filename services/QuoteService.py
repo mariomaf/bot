@@ -1,6 +1,8 @@
 import services.TradingPairService as tradingPairService
 import services.BuyOrderService as buyOrderService
 import services.SellOrderService as sellOrderService
+import services.InitService as initService
+import services.CommonServices as commonService
 import entity.quoteRequest, requests, json
 import entity.quoteResponse
 import services.TokenService
@@ -70,7 +72,7 @@ def convertQuoteResponseReceived(quoteResponseDTO, apiprotocol):
 # function to add a quote to the JSON with historical quotes
 def write_json(quoteResponseEntity):
     # First fetch the history of quotes
-    quoteList = fetchQuoteResponse(InitService.quote_file_location)
+    quoteList = fetchQuoteResponse()
     # Now append the new quote
     quoteList = addQuoteToList(quoteList, quoteResponseEntity)
     # Now convert from quote entity list to JSON object
@@ -79,23 +81,14 @@ def write_json(quoteResponseEntity):
     with open(InitService.getQuoteFileLocation(), 'w+') as json_file:
         json_file.write(quoteJSON + '\n')
 
-# TODO : Make this a common service
-def checkIfFileExists(filename):
-    my_file = Path(filename)
-    if my_file.is_file():
-        return True
-    else:
-        return False
-
-
 def fetchRecentQuotes(number):
     # TODO : if the list grows overtime -number might be getting slower, then first reverse the list and then take the first 5 elements
-    quoteList = list(reversed(fetchQuoteResponse(InitService.quote_file_location)[-number:]))
+    quoteList = list(reversed(fetchQuoteResponse()[-number:]))
     return quoteList
 
-
-def fetchQuoteResponse(filename):
-    if checkIfFileExists(filename):
+def fetchQuoteResponse():
+    filename = initService.getQuoteFileLocation()
+    if commonService.checkIfFileExists(filename):
         with open(filename) as json_file:
             JSONFromFile = json.load(json_file)
             # create list of quotes from json file

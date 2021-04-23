@@ -6,6 +6,7 @@ import services.QuoteService as quoteService
 import services.BuyOrderService as buyOrderService
 import services.SellOrderService as sellOrderService
 import services.TradeService as tradeService
+import datetime
 
 
 
@@ -15,6 +16,12 @@ InitService.InitialiseBot()
 
 @app.route('/')
 def home():
+    return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
+
+@app.route('/restart')
+def restart():
+    print(datetime.datetime.now().isoformat() + " ##### Engine: Restart #####")
+    InitService.RestartBot()
     return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
 
 @app.route('/tokens/')
@@ -29,7 +36,7 @@ def protocols():
 @app.route('/schedule/quotes')
 def fetchQuotes():
     quoteService.ScheduledQuoteRequest()
-    return render_template("index.html")
+    return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
 
 # This API
 @app.route('/quote')
@@ -42,7 +49,7 @@ def buyorders():
 
 @app.route('/sellorders')
 def sellorders():
-    return render_template("sellorders/sellorders.html", sellOrderList = sellOrderService.fetchSellOrderList())
+    return render_template("sellorders/sellorders.html", sellOrderList = sellOrderService.fetchSellOrders())
 
 @app.route('/trades')
 def trades():
@@ -52,7 +59,7 @@ def trades():
 @app.route('/schedule/placevirtualbuyorders')
 def placeVirtualBuyOrders():
     buyOrderService.placeVirtualBuyorders()
-    return render_template("index.html")
+    return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
 
 if __name__ == '__main__':
     app.run()

@@ -3,6 +3,7 @@ import entity.sellOrder
 import services.InitService as InitService
 from pathlib import Path
 import services.TradingPairService as tradingPairService
+import services.CommonServices as commonService
 
 
 def placeVirtualSellOrder():
@@ -28,7 +29,7 @@ def swapToSellOrder(buyOrder):
 def write_json(sellOrder):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
     # First fetch the list of outstanding SellOrders
-    sellOrderList = fetchSellOrders(InitService.sell_orders_file_location)
+    sellOrderList = fetchSellOrders()
     # now append the new sellOrder
     sellOrderList = addSellOrderToList(sellOrderList, sellOrder)
     # now convert from quote entity list to JSON object
@@ -37,9 +38,10 @@ def write_json(sellOrder):
     with open(InitService.getSellOrdersFileLocation(), 'w+') as json_file:
         json_file.write(sellOrderJSON + '\n')
 
-def fetchSellOrders(filename):
+def fetchSellOrders():
+    filename = InitService.getSellOrdersFileLocation()
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Fetching outstanding Sell Orders #####")
-    if checkIfFileExists(filename):
+    if commonService.checkIfFileExists(filename):
         with open(filename) as json_file:
             JSONFromFile = json.load(json_file)
             # create list of quotes from json file
@@ -49,6 +51,7 @@ def fetchSellOrders(filename):
         print(datetime.datetime.now().isoformat() + " ##### SellOrderService: No outstanding sell orders found #####")
         sellOrderList = []
         return sellOrderList
+
 
 # function that converts JSON with sellOrders into list of sellOrder entity objects
 def convertToList(sellOrderJSON):
@@ -75,27 +78,13 @@ def addSellOrderToList(sellOrderList, sellOrder):
     sellOrderList.append(sellOrder)
     return sellOrderList
 
-# TODO : Make this a common service
-def checkIfFileExists(filename):
-    my_file = Path(filename)
-    if my_file.is_file():
-        return True
-    else:
-        return False
-
-def fetchSellOrderList():
-    with open(InitService.getSellOrdersFileLocation()) as json_file:
-        JSONFromFile = json.load(json_file)
-        sellOrderList = convertToList(JSONFromFile)
-        return sellOrderList
-
 def fetchSellOrdersToSwap(quoteResponseList):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Fetch SellOrders to SWAP #####")
     takeprofit = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
     # Validate if an outstanding virtual sell order is smaller then recent quote
     modifiedSellOrderlist = []
     for quoteResponse in quoteResponseList:
-        for sellOrder in fetchSellOrderList():
+        for sellOrder in fetchSellOrders():
             if float(sellOrder.sellprice) < float(quoteResponse.toAmount):
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: !!HIT!! Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is higher then Virtual Sell Order price [[" + str(
@@ -130,9 +119,8 @@ def appendClosedSwapToFile(closedSellOrder):
     with open(InitService.getClosedSwapsFileLocation(), 'w+') as json_file:
         json_file.write(closedSwapJSON + '\n')
 
-# TODO : Make this a common service
 def fetchClosedSwaps(filename):
-    if checkIfFileExists(filename):
+    if commonService.checkIfFileExists(filename):
         with open(filename) as json_file:
             JSONFromFile = json.load(json_file)
             # create list of quotes from json file
@@ -141,14 +129,6 @@ def fetchClosedSwaps(filename):
     else:
         closedSwapList = []
         return closedSwapList
-
-# TODO : Make this a common service
-def checkIfFileExists(filename):
-    my_file = Path(filename)
-    if my_file.is_file():
-        return True
-    else:
-        return False
 
 # function to add a new closed swap to an existing List of Closed Sell Order Objects
 def addClosedSwapToList(closedSwapList, closedSwap):

@@ -28,6 +28,11 @@ def InitialiseBot():
     backGroundService.startBackGroundTasks()
     print(datetime.datetime.now().isoformat() + " ##### InitService: Bot is initialised #####")
 
+def RestartBot():
+    print(datetime.datetime.now().isoformat() + " ##### InitService: Restarting bot #####")
+    backGroundService.restartEngine()
+    print(datetime.datetime.now().isoformat() + " ##### InitService: Bot restarted #####")
+
 
 def ReadConfigFile(filename="config.json"):
     with open(filename) as json_file:
@@ -91,7 +96,7 @@ def getDashBoardFigures():
                         "trading_pairs_file_location" : trading_pairs_file_location,
                         "trading_pairs" : TradingPairService.FetchTradingPairs(),
                         "buy_orders" : BuyOrderService.fetchBuyOrderList(),
-                        "sell_orders" : SellOrderService.fetchSellOrderList(),
+                        "sell_orders" : SellOrderService.fetchSellOrders(),
                         "closed_trades": TradeService.fetchClosedTradeList(),
                         "last_quotes" : QuoteService.fetchRecentQuotes(1)}
     return dashBoardFigures
