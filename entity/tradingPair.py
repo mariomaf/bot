@@ -3,7 +3,7 @@ import datetime, json
 # TODO: add min and max buy range
 class TradingPair:
     ''' This is the TradingPair Class '''
-    def __init__(self, baseToken, swapToken, moonBagPercentage, allocationPercentage, takeProfitPercentage, minimumDistance, minimumOrderSize, pathPreferred, maxOutstandingBuyOrders, slippage, baseTokenAddress, swapTokenAddress, dateTimeStamp):
+    def __init__(self, baseToken, swapToken, moonBagPercentage, allocationPercentage, takeProfitPercentage, minimumDistance, minimumOrderSize, maxBuyPrice, pathPreferred, maxOutstandingBuyOrders, slippage, baseTokenAddress, swapTokenAddress, dateTimeStamp):
         self.baseToken = baseToken
         self.swapToken = swapToken
         self.moonBagPercentage = moonBagPercentage
@@ -11,6 +11,7 @@ class TradingPair:
         self.takeProfitPercentage = takeProfitPercentage
         self.minimumDistance = minimumDistance
         self.minimumOrderSize = minimumOrderSize
+        self.maxBuyPrice = maxBuyPrice
         self.pathPreferred = pathPreferred
         self.maxOutstandingBuyOrders = maxOutstandingBuyOrders
         self.slippage = slippage
@@ -56,3 +57,5 @@ class TradingPair:
     def get_minimumDistance(self):
         return self.minimumDistance
 
+    def get_maxBuyPrice(self):
+        return self.maxBuyPrice

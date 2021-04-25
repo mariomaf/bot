@@ -35,11 +35,11 @@
     </tr>
     <tr>
         <td>Last buy order cycle time</td>
-        <td>{{ dashBoardData["buy_orders"][0]["BTSBUSD"][0]["dateTimeStamp"] }}</td>
+        <td>{% if dashBoardData["buy_orders"][0]["BTSBUSD"]|length > 0 %} {{ dashBoardData["buy_orders"][0]["BTSBUSD"][0]["dateTimeStamp"] }}{% endif %}</td>
     </tr>
     <tr>
         <td>Last quote actualisation time</td>
-        <td>{{ dashBoardData["last_quotes"][0]["dateTimeStamp"] }}</td>
+        <td>{% if dashBoardData["last_quotes"]|length > 0 %} {{ dashBoardData["last_quotes"][0]["dateTimeStamp"] }}{% endif %}</td>
     </tr>
 </table>
 

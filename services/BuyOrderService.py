@@ -36,22 +36,24 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
     buyOrderList = []
     if len(recentQuoteList) != 0:
         quotedToAmount = [o.toAmount for o in recentQuoteList]
-        for x in range(0, tradingPair.maxOutstandingBuyOrders):
-            # TODO calculate free allocation available for the base token
-            pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
-            buyPrice = quotedToAmount[0] * pricingFactor / 100
-            amount = tradingPair.get_minimumOrderSize()
-            amountSwapped = amount / buyPrice
-            # In the loop this should chance per loop
-            buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,
-                                                tradingPair.swapToken,
-                                                str(round(buyPrice, 5)),
-                                                amount,
-                                                str(round(amountSwapped, 5)),
-                                                str(round(quotedToAmount[0], 5)),
-                                                str(round(pricingFactor, 2)))
-            buyOrderList.append(buyOrder)
-
+        if quotedToAmount[0] <= tradingPair.maxBuyPrice:
+            for x in range(0, tradingPair.maxOutstandingBuyOrders):
+                # TODO calculate free allocation available for the base token
+                pricingFactor = (100 - tradingPairService.fetchTradingPairSetting("BUSD", "BTS", "minimumDistance")) * (1 - (1 + x * 1) / 100)
+                buyPrice = quotedToAmount[0] * pricingFactor / 100
+                amount = tradingPair.get_minimumOrderSize()
+                amountSwapped = amount / buyPrice
+                # In the loop this should chance per loop
+                buyOrder = entity.buyOrder.BuyOrder(tradingPair.baseToken,
+                                                    tradingPair.swapToken,
+                                                    str(round(buyPrice, 5)),
+                                                    amount,
+                                                    str(round(amountSwapped, 5)),
+                                                    str(round(quotedToAmount[0], 5)),
+                                                    str(round(pricingFactor, 2)))
+                buyOrderList.append(buyOrder)
+        else:
+            print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Recent quote is higher then Max Buy Price #####")
     return buyOrderList
 
 

@@ -32,6 +32,7 @@ def ConvertToList(tradingPairJSON):
                                                     tradingPairFromJSON["takeProfitPercentage"],
                                                     tradingPairFromJSON["minimumDistance"],
                                                     tradingPairFromJSON["minimumOrderSize"],
+                                                    tradingPairFromJSON["maxBuyPrice"],
                                                     tradingPairFromJSON["pathPreferred"],
                                                     tradingPairFromJSON['maxOutstandingBuyOrders'],
                                                     tradingPairFromJSON["slippage"],
