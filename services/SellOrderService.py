@@ -10,21 +10,31 @@ def placeVirtualSellOrder():
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Creating Virtual SellOrder #####")
 
 
-def swapToSellOrder(buyOrder):
+def swapToSellOrder(buyOrder, quoteResponse):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
     # TODO: also include temporarily the buyorder being swapped and later the actual swapped order details along with the sell order
+    # TODO: include slippage
     tp = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
     sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,  # The swaptoken from buy becomes basetoken
                                         buyOrder.baseToken, # The basetoken from buy becomes swaptoken
-                                        buyOrder.buyprice,  # Price for which the amount of basetoken was purchased
-                                        float(buyOrder.buyprice) * (1 + tp / 100),  # sell price
-                                        buyOrder.amountSwapped, # amount swapped in buy order expressed in base token of sell order
-                                        float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp / 100),  # Swapped amount after sell expressed in swap token
-                                        float(buyOrder.amountSwapped) * float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice) * float(buyOrder.amountSwapped), # expected profit
-                                        #float(buyOrder.buyprice) * (1 + tp / 100) - float(buyOrder.buyprice),   # expected profit
-                                        tp)            # Take profit percentage
-    write_json(sellOrder)
+                                        quoteResponse.toAmount,  # Price for which the amount of basetoken was purchased, for now this is the quoted price
+                                        float(quoteResponse.toAmount) * (1 + tp / 100),  # sell price based on quoted price later based on real swap
+                                        buyOrder.amount / quoteResponse.toAmount, # amount swapped in buy order expressed in base token of sell order
+                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100), # Swapped amount if sell order would be filled
+                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100) - buyOrder.amount, # expected profit
+                                        tp,            # Take profit percentage
+                                        quoteResponse,
+                                        buyOrder)
+    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
+    # First fetch the list of outstanding SellOrders
+    sellOrderList = fetchSellOrders()
+    # now append the new sellOrder
+    sellOrderList = addSellOrderToList(sellOrderList, sellOrder)
+    # now convert from quote entity list to JSON object
+    commonService.writeJson(InitService.getSellOrdersFileLocation(), sellOrderList)
+    #write_json(sellOrder)
 
+# TODO : Remove below unused methond
 # function to add a sellOrder to the JSON
 def write_json(sellOrder):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
@@ -66,6 +76,8 @@ def convertToList(sellOrderJSON):
                                                     sellOrder["amountSwapped"],
                                                     sellOrder["expectedprofit"],
                                                     sellOrder["takeprofitpercentage"],
+                                                    sellOrder["quote"],
+                                                    sellOrder["buyOrder"],
                                                     sellOrder["dateTimeStamp"])
         # now add the entity object to the list
         sellOrderList.append(sellOrderToAdd)
@@ -78,6 +90,7 @@ def addSellOrderToList(sellOrderList, sellOrder):
     sellOrderList.append(sellOrder)
     return sellOrderList
 
+
 def fetchSellOrdersToSwap(quoteResponseList):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Fetch SellOrders to SWAP #####")
     takeprofit = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
@@ -89,25 +102,18 @@ def fetchSellOrdersToSwap(quoteResponseList):
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: !!HIT!! Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is higher then Virtual Sell Order price [[" + str(
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
-                appendClosedSwapToFile(sellOrder)
+                appendClosedSwapToFile(sellOrder, quoteResponse)
             else:
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is lower than Virtual Sell Order price [[" + str(
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
                 # SellOrder remains valid therefore appended to the ModifiedSellOrderList
                 modifiedSellOrderlist.append(sellOrder)
-        write_json2(modifiedSellOrderlist, InitService.getSellOrdersFileLocation())
+        commonService.writeJson(InitService.getSellOrdersFileLocation(), modifiedSellOrderlist)
+        # write_json2(modifiedSellOrderlist, InitService.getSellOrdersFileLocation())
         # appendClosedSwapToFile(closedSellOrderList)
 
-
-def write_json2(sellOrderList, fileLocation):
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Write to file " + fileLocation + " #####")
-    sellOrderListDTO = json.dumps(sellOrderList, ensure_ascii=False, default=lambda o: o.__dict__,
-                                 sort_keys=False, indent=4)
-    with open(fileLocation, 'w') as json_file:
-        json_file.write(sellOrderListDTO + '\n')
-
-def appendClosedSwapToFile(closedSellOrder):
+def appendClosedSwapToFile(closedSellOrder, quoteResponse):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Appending ClosedSellOrder to ClosedSwaps.json #####")
     # First fetch the historical ClosedSwaps from file
     closedSwapList = fetchClosedSwaps(InitService.getClosedSwapsFileLocation())

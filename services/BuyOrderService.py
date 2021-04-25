@@ -6,6 +6,7 @@ import json, datetime
 import services.InitService as InitService
 import services.SellOrderService as SellOrderService
 import services.CommonServices as commonService
+import services.SwapService as swapService
 
 
 # This function is triggered via an API by a scheduler in order to calculate the buy orders based on the pair settings
@@ -24,7 +25,7 @@ def placeVirtualBuyorders():
         pairToAdd[pair] = buyOrderPairList
         outStandingBuyOrderList.append(pairToAdd)
     # Now actualise the buyOrderList JSON file
-    write_json(outStandingBuyOrderList)
+    commonService.writeJson(InitService.getBuyOrderFileLocation(), outStandingBuyOrderList)
     print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: BuyOrderList actualised #####")
     # TODO: Return full list, not only actualised ones but also ones for which no pair is active
     return outStandingBuyOrderList
@@ -52,13 +53,6 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
             buyOrderList.append(buyOrder)
 
     return buyOrderList
-
-
-def write_json(outstandingBuyOrderList):
-    buyOrderListDTO = json.dumps(outstandingBuyOrderList, ensure_ascii=False, default=lambda o: o.__dict__,
-                                 sort_keys=False, indent=4)
-    with open(InitService.getBuyOrderFileLocation(), 'w') as json_file:
-        json_file.write(buyOrderListDTO + '\n')
 
 
 def fetchBuyOrderList():
@@ -109,7 +103,8 @@ def checkBuyOrdersForExecution(quoteResponseList):
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: !!HIT!! Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is below Virtual Buy Order price [[" + str(
                             buyOrder.buyprice) + "]] for pair <" + pair + ">. #####")
-                        SellOrderService.swapToSellOrder(buyOrder)
+                        SellOrderService.swapToSellOrder(buyOrder, quoteResponse)
+                        swapService.swapBuyOrder(buyOrder, quoteResponse)
                     else:
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is above Virtual Buy Order price [[" + str(
@@ -118,9 +113,6 @@ def checkBuyOrdersForExecution(quoteResponseList):
                         modifiedBuyOrderlist.append(buyOrder)
                 # Now replace the buyOrderList with the modifiedBuyOrderList
                 buyOrderListPair[pair] = modifiedBuyOrderlist
-                # TODO: Can be removed? Next line?
-                jsonStr = json.dumps(buyOrderListPair, ensure_ascii=False, default=lambda o: o.__dict__,
-                                     sort_keys=False, indent=4)
             newOutStandingBuyOrderList = []
             newOutStandingBuyOrderList.append(buyOrderListPair)
-        write_json(newOutStandingBuyOrderList)
+        commonService.writeJson(InitService.getBuyOrderFileLocation(), newOutStandingBuyOrderList)

@@ -29,6 +29,8 @@ def convertToList(closedSwapJSON):
                                                     closedSwap["amountSwapped"],
                                                     closedSwap["expectedprofit"],
                                                     closedSwap["takeprofitpercentage"],
+                                                    closedSwap["quote"],
+                                                    closedSwap["buyOrder"],
                                                     closedSwap["dateTimeStamp"])
         # now add the entity object to the list
         closedSwapList.append(closedSwapTradeToAdd)
