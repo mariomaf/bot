@@ -4,7 +4,6 @@ import entity.buyOrder
 import entity.tradingPair
 import json, datetime
 import services.InitService as InitService
-import services.SellOrderService as SellOrderService
 import services.CommonServices as commonService
 import services.SwapService as swapService
 
@@ -82,6 +81,7 @@ def ConvertToList(BuyOrderListDTO):
                                                     outStandingBuyOrderDTO["amountSwapped"],
                                                     outStandingBuyOrderDTO["lastpricequote"],
                                                     outStandingBuyOrderDTO["distancepercentage"],
+                                                    outStandingBuyOrderDTO["UUID"],
                                                     outStandingBuyOrderDTO["dateTimeStamp"])
                 outStandingBuyOrderPairList.append(buyOrder)
 
@@ -105,13 +105,14 @@ def checkBuyOrdersForExecution(quoteResponseList):
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: !!HIT!! Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is below Virtual Buy Order price [[" + str(
                             buyOrder.buyprice) + "]] for pair <" + pair + ">. #####")
-                        SellOrderService.swapToSellOrder(buyOrder, quoteResponse)
+                        #SellOrderService.swapToSellOrder(buyOrder, quoteResponse)
                         swapService.swapBuyOrder(buyOrder, quoteResponse)
                     else:
                         print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Quote price [[" + str(
                             quoteResponse.toAmount) + "]] is above Virtual Buy Order price [[" + str(
                             buyOrder.buyprice) + "]] for pair <" + pair + ">. #####")
                         # BuyOrder remains valid therefore appended to the ModifiedBuyOrderList
+                        # for testing only swapService.swapBuyOrder(buyOrder, quoteResponse)
                         modifiedBuyOrderlist.append(buyOrder)
                 # Now replace the buyOrderList with the modifiedBuyOrderList
                 buyOrderListPair[pair] = modifiedBuyOrderlist

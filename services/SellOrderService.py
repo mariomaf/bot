@@ -6,48 +6,6 @@ import services.TradingPairService as tradingPairService
 import services.CommonServices as commonService
 
 
-def placeVirtualSellOrder():
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Creating Virtual SellOrder #####")
-
-
-def swapToSellOrder(buyOrder, quoteResponse):
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
-    # TODO: also include temporarily the buyorder being swapped and later the actual swapped order details along with the sell order
-    # TODO: include slippage
-    tp = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
-    sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,  # The swaptoken from buy becomes basetoken
-                                        buyOrder.baseToken, # The basetoken from buy becomes swaptoken
-                                        quoteResponse.toAmount,  # Price for which the amount of basetoken was purchased, for now this is the quoted price
-                                        float(quoteResponse.toAmount) * (1 + tp / 100),  # sell price based on quoted price later based on real swap
-                                        buyOrder.amount / quoteResponse.toAmount, # amount swapped in buy order expressed in base token of sell order
-                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100), # Swapped amount if sell order would be filled
-                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100) - buyOrder.amount, # expected profit
-                                        tp,            # Take profit percentage
-                                        quoteResponse,
-                                        buyOrder)
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
-    # First fetch the list of outstanding SellOrders
-    sellOrderList = fetchSellOrders()
-    # now append the new sellOrder
-    sellOrderList = addSellOrderToList(sellOrderList, sellOrder)
-    # now convert from quote entity list to JSON object
-    commonService.writeJson(InitService.getSellOrdersFileLocation(), sellOrderList)
-    #write_json(sellOrder)
-
-# TODO : Remove below unused methond
-# function to add a sellOrder to the JSON
-def write_json(sellOrder):
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
-    # First fetch the list of outstanding SellOrders
-    sellOrderList = fetchSellOrders()
-    # now append the new sellOrder
-    sellOrderList = addSellOrderToList(sellOrderList, sellOrder)
-    # now convert from quote entity list to JSON object
-    sellOrderJSON = json.dumps(sellOrderList, ensure_ascii=False, default=lambda o: o.__dict__,
-                           sort_keys=False, indent=4)
-    with open(InitService.getSellOrdersFileLocation(), 'w+') as json_file:
-        json_file.write(sellOrderJSON + '\n')
-
 def fetchSellOrders():
     filename = InitService.getSellOrdersFileLocation()
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Fetching outstanding Sell Orders #####")
@@ -78,6 +36,7 @@ def convertToList(sellOrderJSON):
                                                     sellOrder["takeprofitpercentage"],
                                                     sellOrder["quote"],
                                                     sellOrder["buyOrder"],
+                                                    sellOrder["UUID"],
                                                     sellOrder["dateTimeStamp"])
         # now add the entity object to the list
         sellOrderList.append(sellOrderToAdd)
@@ -141,3 +100,29 @@ def addClosedSwapToList(closedSwapList, closedSwap):
     # append the quote entity object to the quoteList
     closedSwapList.append(closedSwap)
     return closedSwapList
+
+
+def placeVirtualSellOrder(swapOrder):
+    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
+    buyOrder = swapOrder.order
+    quoteResponse = swapOrder.quote
+    # TODO: also include temporarily the buyorder being swapped and later the actual swapped order details along with the sell order
+    # TODO: include slippage
+    tp = tradingPairService.FetchTradingPairs()[0].takeProfitPercentage
+    sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,  # The swaptoken from buy becomes basetoken
+                                        buyOrder.baseToken, # The basetoken from buy becomes swaptoken
+                                        quoteResponse.toAmount,  # Price for which the amount of basetoken was purchased, for now this is the quoted price
+                                        float(quoteResponse.toAmount) * (1 + tp / 100),  # sell price based on quoted price later based on real swap
+                                        buyOrder.amount / quoteResponse.toAmount, # amount swapped in buy order expressed in base token of sell order
+                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100), # Swapped amount if sell order would be filled
+                                        buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100) - buyOrder.amount, # expected profit
+                                        tp,            # Take profit percentage
+                                        quoteResponse,
+                                        buyOrder)
+    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
+    # First fetch the list of outstanding SellOrders
+    sellOrderList = fetchSellOrders()
+    # now append the new sellOrder
+    sellOrderList = addSellOrderToList(sellOrderList, sellOrder)
+    # now convert from quote entity list to JSON object
+    commonService.writeJson(InitService.getSellOrdersFileLocation(), sellOrderList)

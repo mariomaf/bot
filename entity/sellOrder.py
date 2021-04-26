@@ -1,9 +1,9 @@
-import json, datetime
+import json, datetime, uuid
 
 
 class SellOrder:
     ''' This is the SellOrder Class '''
-    def __init__(self, baseToken, swapToken, buyprice, sellprice, amount, amountSwapped, expectedprofit, takeprofitpercentage, quote, buyOrder, dateTimeStamp=None):
+    def __init__(self, baseToken, swapToken, buyprice, sellprice, amount, amountSwapped, expectedprofit, takeprofitpercentage, quote, buyOrder, UUID=None, dateTimeStamp=None):
         self.baseToken = baseToken                          # as this is a swap the base and swap tokens are reversed
         self.swapToken = swapToken                          # as this is a swap the base and swap tokens are reversed
         self.buyprice = buyprice                            # This is the price for which the amount was swapped before
@@ -14,6 +14,7 @@ class SellOrder:
         self.takeprofitpercentage = takeprofitpercentage
         self.quote = quote                                  # The quote as derived via teh quote service
         self.buyOrder = buyOrder                            # This is the original buyOrder as placed by the BuyOrderService
+        self.UUID = UUID if UUID is not None else str(uuid.uuid4())
         self.dateTimeStamp = dateTimeStamp if dateTimeStamp is not None else datetime.datetime.now().isoformat()
 
     def toJSON(self):

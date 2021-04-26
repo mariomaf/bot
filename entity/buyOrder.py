@@ -1,9 +1,9 @@
-import json, datetime
+import json, datetime, uuid
 
 # TODO: Add max buy price as parameter
 class BuyOrder:
     ''' This is the BuyOrder Class '''
-    def __init__(self, baseToken, swapToken, buyprice, amount, amountSwapped, lastpricequote, distancepercentage, dateTimeStamp=None):
+    def __init__(self, baseToken, swapToken, buyprice, amount, amountSwapped, lastpricequote, distancepercentage, UUID=None, dateTimeStamp=None):
         self.baseToken = baseToken
         self.swapToken = swapToken
         self.buyprice = buyprice
@@ -11,6 +11,7 @@ class BuyOrder:
         self.amountSwapped = amountSwapped
         self.lastpricequote = lastpricequote
         self.distancepercentage = distancepercentage
+        self.UUID = UUID if UUID is not None else str(uuid.uuid4())
         self.dateTimeStamp = dateTimeStamp if dateTimeStamp is not None else datetime.datetime.now().isoformat()
 
     def toJSON(self):
