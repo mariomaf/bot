@@ -1,0 +1,512 @@
+[
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 132.06739864751705,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:53:58.314030"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:54:28.649783"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:54:59.304954"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:55:29.984718"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:56:00.361994"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:56:30.818670"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:57:01.323362"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:57:32.023943"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:58:02.391196"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:58:33.115057"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:59:04.597041"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T16:59:35.235277"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37388374572856,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:00:07.450798"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 131.37667662357234,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:00:37.894185"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:01:09.064405"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:01:39.515721"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:02:09.877094"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:02:41.624706"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:03:13.367692"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 133.99937832794689,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:03:44.893015"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 135.38486386082627,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:04:15.339704"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 135.38486386082627,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:04:45.714946"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 135.38486386082627,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:05:16.884828"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 137.53135619688956,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:05:48.424464"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 135.38486386082627,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:06:19.519921"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.1251159598162,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:06:50.515140"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.64563792264534,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:07:22.620902"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.20233491040915,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:07:55.779754"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 137.05789943131904,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:08:27.119050"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.20233491040915,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:08:59.240833"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.82379720286585,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:09:30.106620"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.79383981769925,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:10:02.671560"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.25321592745445,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:10:33.663465"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 134.55063944285982,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:11:05.350962"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.25321592745445,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:11:36.465193"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.72892603462807,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:13:57.167078"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.72892603462807,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:14:29.400689"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 138.72892603462807,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:14:59.858168"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 137.031361084578,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:15:31.935748"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 137.031361084578,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:16:02.287465"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.77925900301915,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:16:34.597291"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.79911687282265,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:17:04.972001"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 140.77925900301915,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:17:35.315471"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 143.18205021591382,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:18:05.816537"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 143.18205021591382,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:18:36.179178"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 143.18205021591382,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:19:07.057385"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 143.2222041564202,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:19:20.473688"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 147.1848114073054,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:19:52.257938"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 147.1848114073054,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:20:23.312460"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 143.18205021591382,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:20:53.867818"
+    },
+    {
+        "fromToken": "BTS",
+        "toToken": "BUSD",
+        "fromAmount": 1,
+        "toAmount": 147.50537479263204,
+        "path": "PANCAKESWAP",
+        "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+        "dateTimeStamp": "2021-04-28T17:21:25.293479"
+    }
+]

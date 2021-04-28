@@ -1,0 +1,18 @@
+[
+    {
+        "baseToken": "BUSD",
+        "swapToken": "BTS",
+        "moonBagPercentage": 0,
+        "allocationPercentage": 10,
+        "takeProfitPercentage": 1.5,
+        "minimumDistance": -0.5,
+        "minimumOrderSize" : 10,
+        "maxBuyPrice" : 140,
+        "pathPreferred": "PANCAKESWAP",
+        "maxOutstandingBuyOrders": 10,
+        "slippage": 2,
+        "baseTokenAddress": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        "swapTokenAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+        "dateTimeStamp": "2021-04-02T23:27:09.277886"
+    }
+]

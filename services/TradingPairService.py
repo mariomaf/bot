@@ -4,7 +4,6 @@ import services.InitService as initService
 
 tradingPairList = []
 
-
 def FetchTradingPairs():
     # Fetch a list of trading pairs for which quotes should be fetched
     global tradingPairList

@@ -1,0 +1,116 @@
+[
+    {
+        "BTSBUSD": [
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "129.90138",
+                "amount": 10,
+                "amountSwapped": "0.07698",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "99.5",
+                "UUID": "667e1110-c408-459e-83b8-6deb66d2e5e9",
+                "dateTimeStamp": "2021-04-28T16:44:30.038654"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "128.58925",
+                "amount": 10,
+                "amountSwapped": "0.07777",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "98.49",
+                "UUID": "e13efdef-d812-48ce-affd-d3782ecd46d9",
+                "dateTimeStamp": "2021-04-28T16:44:30.038734"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "127.27711",
+                "amount": 10,
+                "amountSwapped": "0.07857",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "97.48",
+                "UUID": "18386a8f-e3d9-44cc-8f02-8bd289553cbb",
+                "dateTimeStamp": "2021-04-28T16:44:30.038796"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "125.96497",
+                "amount": 10,
+                "amountSwapped": "0.07939",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "96.48",
+                "UUID": "963b9555-937c-4fcb-9c74-01008f2130fd",
+                "dateTimeStamp": "2021-04-28T16:44:30.038851"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "124.65284",
+                "amount": 10,
+                "amountSwapped": "0.08022",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "95.47",
+                "UUID": "a8a72fbb-cce8-43a3-91bf-4237c3ba08c4",
+                "dateTimeStamp": "2021-04-28T16:44:30.038906"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "123.3407",
+                "amount": 10,
+                "amountSwapped": "0.08108",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "94.47",
+                "UUID": "df78fcda-540f-4e6c-a9df-ceb0d2687ee0",
+                "dateTimeStamp": "2021-04-28T16:44:30.038959"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "122.02857",
+                "amount": 10,
+                "amountSwapped": "0.08195",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "93.46",
+                "UUID": "e414937a-84ba-4803-8e1d-f2adf2277465",
+                "dateTimeStamp": "2021-04-28T16:44:30.039011"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "120.71643",
+                "amount": 10,
+                "amountSwapped": "0.08284",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "92.46",
+                "UUID": "2d39b141-5823-4e89-8040-89fd8e746e37",
+                "dateTimeStamp": "2021-04-28T16:44:30.039063"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "119.4043",
+                "amount": 10,
+                "amountSwapped": "0.08375",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "91.45",
+                "UUID": "51c707f0-ba90-49f9-8b1b-cde2f475b7a1",
+                "dateTimeStamp": "2021-04-28T16:44:30.039114"
+            },
+            {
+                "baseToken": "BUSD",
+                "swapToken": "BTS",
+                "buyprice": "118.09216",
+                "amount": 10,
+                "amountSwapped": "0.08468",
+                "lastpricequote": "130.56071",
+                "distancepercentage": "90.45",
+                "UUID": "93392117-7366-4636-ab54-d28b6d583709",
+                "dateTimeStamp": "2021-04-28T16:44:30.039166"
+            }
+        ]
+    }
+]
