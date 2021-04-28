@@ -55,7 +55,7 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
             print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Recent quote is higher then Max Buy Price #####")
     return buyOrderList
 
-
+# TODO: Rename to fetchBuyOrders, in line with fetchSellOrders
 def fetchBuyOrderList():
     filename = InitService.getBuyOrderFileLocation()
     if commonService.checkIfFileExists(filename):

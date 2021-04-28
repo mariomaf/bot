@@ -1,0 +1,70 @@
+[
+    {
+        "baseToken": "BTS",
+        "swapToken": "BUSD",
+        "buyprice": "116.35042",
+        "sellprice": 118.0956763,
+        "amount": "0.08595",
+        "amountSwapped": 10.150323377984998,
+        "expectedprofit": 0.1500047789849983,
+        "takeprofitpercentage": 1.5,
+        "quote": {
+            "fromToken": "BTS",
+            "toToken": "BUSD",
+            "fromAmount": 1,
+            "toAmount": 115.5894989772039,
+            "path": "PANCAKESWAP",
+            "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+            "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+            "UUID": "681a3a8c-9bb7-4891-abed-f0a1284f9c05",
+            "dateTimeStamp": "2021-04-25T19:14:34.858571"
+        },
+        "buyOrder": {
+            "baseToken": "BUSD",
+            "swapToken": "BTS",
+            "buyprice": "116.35042",
+            "amount": 10,
+            "amountSwapped": "0.08595",
+            "lastpricequote": "116.94098",
+            "distancepercentage": "99.5",
+            "UUID": "34a574e6-32ba-4c8e-9804-dae464b60dda",
+            "dateTimeStamp": "2021-04-25T17:50:05.211712"
+        },
+        "UUID": "98148973-d59e-458a-bd0e-600b5222d26c",
+        "dateTimeStamp": "2021-04-25T19:14:34.872256"
+    },
+    {
+        "baseToken": "BTS",
+        "swapToken": "BUSD",
+        "buyprice": 116.4766692823541,
+        "sellprice": 118.22381932158939,
+        "amount": 0.08585410332912888,
+        "amountSwapped": 10.149999999999999,
+        "expectedprofit": 0.14999999999999858,
+        "takeprofitpercentage": 1.5,
+        "quote": {
+            "fromToken": "BTS",
+            "toToken": "BUSD",
+            "fromAmount": 1,
+            "toAmount": 116.4766692823541,
+            "path": "PANCAKESWAP",
+            "fromAddress": "0xc2e1acef50ae55661855e8dcb72adb182a3cc259",
+            "toAddress": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+            "UUID": "628a93dc-ac12-4735-953c-138863b967f3",
+            "dateTimeStamp": "2021-04-25T20:50:50.069204"
+        },
+        "buyOrder": {
+            "baseToken": "BUSD",
+            "swapToken": "BTS",
+            "buyprice": "150",
+            "amount": 10,
+            "amountSwapped": "0.0667",
+            "lastpricequote": "152",
+            "distancepercentage": "90.45",
+            "UUID": "da1c75a6-c269-4420-8e10-bf4f7a5d794d",
+            "dateTimeStamp": "2021-04-25T20:47:57.952664"
+        },
+        "UUID": "3244273b-f0eb-483e-bc68-3c776cfb1aae",
+        "dateTimeStamp": "2021-04-25T20:50:50.076492"
+    }
+]
