@@ -5,7 +5,7 @@ import services.BuyOrderService as BuyOrderService
 import services.SellOrderService as SellOrderService
 import services.TradeService as TradeService
 import services.QuoteService as QuoteService
-import json, datetime
+import json, datetime, requests
 import services.BackGroundTaskService as backGroundService
 
 quote_file_location = ''
@@ -98,5 +98,6 @@ def getDashBoardFigures():
                         "buy_orders" : BuyOrderService.fetchBuyOrderList(),
                         "sell_orders" : SellOrderService.fetchSellOrders(),
                         "closed_trades": TradeService.fetchClosedTradeList(),
-                        "last_quotes" : QuoteService.fetchRecentQuotes(1)}
+                        "last_quotes" : QuoteService.fetchRecentQuotes(1),
+                        "status_exchange" : requests.get('https://api.1inch.exchange/v3.0/56/healthcheck').json()["status"]}
     return dashBoardFigures

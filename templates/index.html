@@ -41,6 +41,10 @@
         <td>Last quote actualisation time</td>
         <td>{% if dashBoardData["last_quotes"]|length > 0 %} {{ dashBoardData["last_quotes"][0]["dateTimeStamp"] }}{% endif %}</td>
     </tr>
+    <tr>
+        <td>Status exchange</td>
+        <td>{{ dashBoardData["status_exchange"] }}</td>
+    </tr>
 </table>
 
 
