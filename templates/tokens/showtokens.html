@@ -5,9 +5,9 @@
 <h2>TOKENS</h2>
 <br><br>
 <table>
-    <tr><td>Token</td><td>Name</td><td>Address</td></tr>
+    <tr><td>Token</td><td>Name</td><td>Address</td><td>Digits</td><td>Approve</td></tr>
     {% for token in tokenList %}
-    <tr><td>{{ token.name }}</td><td>{{ token.ticker }}</td><td>{{ token.address }}</td><td>{{ token.decimals }}</td></tr>
+        <tr><td>{{ token.name }}</td><td>{{ token.ticker }}</td><td>{{ token.address }}</td><td>{{ token.decimals }}</td><td><a href="/approve/{{ token.address }}">Approve</a></td></tr>
      {%  endfor %}
 </table>
 

@@ -17,11 +17,13 @@ buy_order_interval = ''
 trading_pairs_file_location = ''
 results_file_location = ''
 closedswaps_file_location = ''
+keys = {}
 
 
 def InitialiseBot():
     print(datetime.datetime.now().isoformat() + " ##### InitService: Initialising Bot #####")
     ReadConfigFile()
+    ImportKeys()
     TokenService.getTokens()
     TradingPairService.FetchTradingPairs()
     ProtocolService.getProtocols()
@@ -32,6 +34,14 @@ def RestartBot():
     print(datetime.datetime.now().isoformat() + " ##### InitService: Restarting bot #####")
     backGroundService.restartEngine()
     print(datetime.datetime.now().isoformat() + " ##### InitService: Bot restarted #####")
+
+def ImportKeys(filename="keys.json"):
+    try:
+        with open(filename) as json_file:
+            global keys
+            keys = json.load(json_file)
+    except:
+        print(print(datetime.datetime.now().isoformat() + " ##### InitService: keys.json import failed #####"))
 
 
 def ReadConfigFile(filename="config.json"):
@@ -99,5 +109,6 @@ def getDashBoardFigures():
                         "sell_orders" : SellOrderService.fetchSellOrders(),
                         "closed_trades": TradeService.fetchClosedTradeList(),
                         "last_quotes" : QuoteService.fetchRecentQuotes(1),
-                        "status_exchange" : requests.get('https://api.1inch.exchange/v3.0/56/healthcheck').json()["status"]}
+                        "status_exchange" : requests.get('https://api.1inch.exchange/v3.0/56/healthcheck').json()["status"],
+                        "public_key" : keys["public"]}
     return dashBoardFigures

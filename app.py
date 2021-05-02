@@ -6,6 +6,7 @@ import services.QuoteService as quoteService
 import services.BuyOrderService as buyOrderService
 import services.SellOrderService as sellOrderService
 import services.TradeService as tradeService
+import services.SwapService as swapService
 import datetime
 
 
@@ -16,6 +17,11 @@ InitService.InitialiseBot()
 
 @app.route('/')
 def home():
+    return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
+
+@app.route('/approve/<address>')
+def approve(address):
+    swapService.ApproveBaseToken(address)
     return render_template("index.html", dashBoardData = InitService.getDashBoardFigures())
 
 @app.route('/restart')

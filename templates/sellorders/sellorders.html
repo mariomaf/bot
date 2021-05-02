@@ -21,12 +21,12 @@
                 <tr>
                     <td>{{ sellOrder['baseToken'] }}</td>
                     <td>{{ sellOrder['swapToken'] }}</td>
-                    <td>{{ sellOrder['buyprice'] }}</td>
-                    <td>{{ sellOrder['sellprice'] }}</td>
-                    <td>{{ sellOrder['amount'] }}</td>
-                    <td>{{ sellOrder['amountSwapped'] }}</td>
-                    <td>{{ sellOrder['expectedprofit'] }}</td>
-                    <td>{{ sellOrder['takeprofitpercentage'] }}</td>
+                    <td>{{ '%0.2f'| format(sellOrder['buyprice']) }}</td>
+                    <td>{{ '%0.2f'| format(sellOrder['sellprice']) }}</td>
+                    <td>{{ '%0.4f'| format(sellOrder['amount']) }}</td>
+                    <td>{{ '%0.2f'| format(sellOrder['amountSwapped']) }}</td>
+                    <td>{{ '%0.2f'| format(sellOrder['expectedprofit']) }}</td>
+                    <td>{{ '%0.2f'| format(sellOrder['takeprofitpercentage']) }}</td>
                     <td>{{ sellOrder['dateTimeStamp'] }}</td>
                 </tr>
             {% endfor %}

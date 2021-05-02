@@ -6,6 +6,10 @@
     <h2>Bot Trading Dashboard</h2><br><br>
 <table>
     <tr>
+        <td>Address</td>
+        <td><a href="https://bscscan.com/address/{{dashBoardData["public_key"]}}" target="_blank">{{ dashBoardData["public_key"] }}</a></td>
+    </tr>
+    <tr>
         <td>Trading Pair</td>
         <td>{{ dashBoardData["trading_pairs"][0]["swapToken"] }} - {{ dashBoardData["trading_pairs"][0]["baseToken"] }}</td>
     </tr>
