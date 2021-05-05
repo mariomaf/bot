@@ -7,5 +7,6 @@
   "results_file_location" : "results.json",
   "quote_interval" : 30,
   "buy_order_interval": 300,
-  "quote_history_count": 50
+  "quote_history_count": 50,
+  "tradeExecution" : false
 }
