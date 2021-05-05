@@ -50,4 +50,8 @@ def fetchTradingPairSetting(basetoken, swaptoken, parameterKey):
         result = None
         # TODO: Add to logging
         print("The requested pair is not set up")
-    return getattr(result, parameterKey)
+    try:
+        return getattr(result, parameterKey)
+    except:
+        print(result.toJSON())
+        return None

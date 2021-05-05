@@ -17,7 +17,6 @@ class TradingPair:
         self.slippage = slippage
         self.baseTokenAddress = baseTokenAddress
         self.swapTokenAddress = swapTokenAddress
-        self.dateTimeStamp = dateTimeStamp
         self.dateTimeStamp = dateTimeStamp if dateTimeStamp is not None else datetime.datetime.now().isoformat()
 
     def toJSON(self):

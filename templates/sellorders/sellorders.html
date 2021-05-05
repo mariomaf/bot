@@ -15,6 +15,7 @@
                 <td><strong>Amount swapped</strong></td>
                 <td><strong>Expected profit</strong></td>
                 <td><strong>Take profit percentage</strong></td>
+                <td><strong>Buy Order TX Hash</strong></td>
                 <td><strong>Date time stamp</strong></td>
             </tr>
             {% for sellOrder in sellOrderList %}
@@ -27,6 +28,7 @@
                     <td>{{ '%0.2f'| format(sellOrder['amountSwapped']) }}</td>
                     <td>{{ '%0.2f'| format(sellOrder['expectedprofit']) }}</td>
                     <td>{{ '%0.2f'| format(sellOrder['takeprofitpercentage']) }}</td>
+                    <td><a href="https://bscscan.com/tx/{{ sellOrder['tx_hash'] }}" target="_blank">{{ sellOrder['tx_hash'] }}</a></td>
                     <td>{{ sellOrder['dateTimeStamp'] }}</td>
                 </tr>
             {% endfor %}

@@ -24,3 +24,19 @@ def getTicker(address):
         if token.address == address:
             ticker = token.ticker
     return ticker
+
+def getDecimals(address):
+    # Find dictionary matching value in list
+    decimals = 18
+    for token in tokenList:
+        if token.address == address:
+            decimals = token.decimals
+    return decimals
+
+def getAddress(ticker):
+    # Find dictionary matching value in list
+    decimals = 18
+    for token in tokenList:
+        if token.ticker == ticker:
+            address = token.address
+    return address

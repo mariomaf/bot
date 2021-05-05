@@ -1,7 +1,6 @@
 import datetime, json
 import entity.sellOrder
 import services.InitService as InitService
-from pathlib import Path
 import services.TradingPairService as tradingPairService
 import services.CommonServices as commonService
 
@@ -36,6 +35,8 @@ def convertToList(sellOrderJSON):
                                                     sellOrder["takeprofitpercentage"],
                                                     sellOrder["quote"],
                                                     sellOrder["buyOrder"],
+                                                    sellOrder["swapOrder"],
+                                                    sellOrder["tx_hash"],
                                                     sellOrder["UUID"],
                                                     sellOrder["dateTimeStamp"])
         # now add the entity object to the list
@@ -102,7 +103,7 @@ def addClosedSwapToList(closedSwapList, closedSwap):
     return closedSwapList
 
 
-def placeVirtualSellOrder(swapOrder):
+def placeVirtualSellOrder(swapOrder, tx_hash):
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Swapping Buy Order to Sell Order #####")
     buyOrder = swapOrder.order
     quoteResponse = swapOrder.quote
@@ -118,7 +119,9 @@ def placeVirtualSellOrder(swapOrder):
                                         buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100) - buyOrder.amount, # expected profit
                                         tp,            # Take profit percentage
                                         quoteResponse,
-                                        buyOrder)
+                                        buyOrder,
+                                        swapOrder,
+                                        tx_hash)
     print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Add new sell order to outstanding Sell Orders #####")
     # First fetch the list of outstanding SellOrders
     sellOrderList = fetchSellOrders()

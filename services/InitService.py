@@ -65,6 +65,8 @@ def ReadConfigFile(filename="config.json"):
     results_file_location = config["results_file_location"]
     global closed_swaps_file_location
     closed_swaps_file_location = config["closed_swaps_file_location"]
+    global tradeExecution
+    tradeExecution = config["tradeExecution"]
 
 
 def getQuoteFileLocation():
@@ -94,6 +96,9 @@ def getResultsFileLocation():
 def getClosedSwapsFileLocation():
     return closed_swaps_file_location
 
+def getTradeExecution():
+    return tradeExecution
+
 
 # TODO: Add Sell Order File Location, Results File Location, ClosedSwaps file location to DashBoardFigures
 def getDashBoardFigures():
@@ -110,5 +115,6 @@ def getDashBoardFigures():
                         "closed_trades": TradeService.fetchClosedTradeList(),
                         "last_quotes" : QuoteService.fetchRecentQuotes(1),
                         "status_exchange" : requests.get('https://api.1inch.exchange/v3.0/56/healthcheck').json()["status"],
-                        "public_key" : keys["public"]}
+                        "public_key" : keys["public"],
+                        "tradeExecution" : getTradeExecution()}
     return dashBoardFigures
