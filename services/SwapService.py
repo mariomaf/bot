@@ -12,15 +12,13 @@ web3 = Web3(Web3.HTTPProvider(bsc))
 
 def swapBuyOrder(buyOrder, quoteResponse):
     # 1. Prepare Swap
-    # TODO take slippage from tradingpairs.json
-    slippage = 1
     swapOrder = entity.swap.Swap(buyOrder.baseToken,
                             buyOrder.swapToken,
                             quoteResponse.toAmount,
                             buyOrder.amount,
                             buyOrder.amount/quoteResponse.toAmount,
                             "BUY",
-                            slippage,
+                            buyOrder.slippage,
                             buyOrder,
                             quoteResponse)
     executeSwap(swapOrder)
@@ -50,20 +48,20 @@ def executeSwap(swapOrder):
             quote = fetchActualQuote()
             # 4. Request swap
             swapRequest = requestSwap(tokenService.getAddress(swapOrder.baseToken), tokenService.getAddress(swapOrder.swapToken), swapOrder.baseAmount, swapOrder.slippage)
-            print(swapRequest["tx"])
+            #print(swapRequest["tx"])
             signed_tx = signTx(swapRequest["tx"])
-            print(signed_tx)
+            #print(signed_tx)
             if initService.getTradeExecution() == True:
-                tx_hash = sendTx(signed_tx)
+                tx_hash = sendTx(signed_tx).hex()
                 print(tx_hash.hex())
             else:
                 tx_hash = "NOT SWAPPED - PAPER TRADING"
             # TODO: BB-8 not implemented yet
             # 4. Creat SellOrder
             if swapOrder.type == "BUY":
-                signed_tx_json = json.dumps(signed_tx, ensure_ascii=False, default=lambda o: o.__dict__,
+                json.dumps(signed_tx, ensure_ascii=False, default=lambda o: o.__dict__,
                           sort_keys=False, indent=4)
-                sellOrderService.placeVirtualSellOrder(swapOrder, tx_hash.hex())
+                sellOrderService.placeVirtualSellOrder(swapOrder, tx_hash)
             elif swapOrder.type == "SELL":
                 print("test temp")
             return

@@ -33,6 +33,7 @@ def convertToList(sellOrderJSON):
                                                     sellOrder["amountSwapped"],
                                                     sellOrder["expectedprofit"],
                                                     sellOrder["takeprofitpercentage"],
+                                                    sellOrder["slippage"],
                                                     sellOrder["quote"],
                                                     sellOrder["buyOrder"],
                                                     sellOrder["swapOrder"],
@@ -113,11 +114,12 @@ def placeVirtualSellOrder(swapOrder, tx_hash):
     sellOrder = entity.sellOrder.SellOrder(buyOrder.swapToken,  # The swaptoken from buy becomes basetoken
                                         buyOrder.baseToken, # The basetoken from buy becomes swaptoken
                                         quoteResponse.toAmount,  # Price for which the amount of basetoken was purchased, for now this is the quoted price
-                                        float(quoteResponse.toAmount) * (1 + tp / 100),  # sell price based on quoted price later based on real swap
-                                        buyOrder.amount / quoteResponse.toAmount, # amount swapped in buy order expressed in base token of sell order
+                                        float(quoteResponse.toAmount) * (1 + (tp  + buyOrder.slippage ) / 100),  # sell price based on quoted price later based on real swap
+                                        buyOrder.amount / quoteResponse.toAmount, # amount swapped incl. max slipage used, in buy order expressed in base token of sell order
                                         buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100), # Swapped amount if sell order would be filled
                                         buyOrder.amount / quoteResponse.toAmount * float(quoteResponse.toAmount) * (1 + tp / 100) - buyOrder.amount, # expected profit
                                         tp,            # Take profit percentage
+                                        buyOrder.slippage,
                                         quoteResponse,
                                         buyOrder,
                                         swapOrder,

@@ -49,7 +49,8 @@ def calculateBuyOrderList(recentQuoteList, tradingPair):
                                                     amount,
                                                     str(round(amountSwapped, 5)),
                                                     str(round(quotedToAmount[0], 5)),
-                                                    str(round(pricingFactor, 2)))
+                                                    str(round(pricingFactor, 2)),
+                                                    tradingPair.slippage)
                 buyOrderList.append(buyOrder)
         else:
             print(datetime.datetime.now().isoformat() + " ##### BuyOrderService: Recent quote is higher then Max Buy Price #####")
@@ -81,6 +82,7 @@ def ConvertToList(BuyOrderListDTO):
                                                     outStandingBuyOrderDTO["amountSwapped"],
                                                     outStandingBuyOrderDTO["lastpricequote"],
                                                     outStandingBuyOrderDTO["distancepercentage"],
+                                                    outStandingBuyOrderDTO["slippage"],
                                                     outStandingBuyOrderDTO["UUID"],
                                                     outStandingBuyOrderDTO["dateTimeStamp"])
                 outStandingBuyOrderPairList.append(buyOrder)
