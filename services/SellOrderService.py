@@ -3,6 +3,7 @@ import entity.sellOrder
 import services.InitService as InitService
 import services.TradingPairService as tradingPairService
 import services.CommonServices as commonService
+import services.TradeService as tradeService
 
 
 def fetchSellOrders():
@@ -63,7 +64,7 @@ def fetchSellOrdersToSwap(quoteResponseList):
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: !!HIT!! Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is higher then Virtual Sell Order price [[" + str(
                     sellOrder.sellprice) + "]] for pair <BTSBUSD> #####")
-                appendClosedSwapToFile(sellOrder, quoteResponse)
+                tradeService.appendClosedSwapToFile(sellOrder, quoteResponse)
             else:
                 print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Quote price [[" + str(
                     quoteResponse.toAmount) + "]] is lower than Virtual Sell Order price [[" + str(
@@ -73,35 +74,6 @@ def fetchSellOrdersToSwap(quoteResponseList):
         commonService.writeJson(InitService.getSellOrdersFileLocation(), modifiedSellOrderlist)
         # write_json2(modifiedSellOrderlist, InitService.getSellOrdersFileLocation())
         # appendClosedSwapToFile(closedSellOrderList)
-
-def appendClosedSwapToFile(closedSellOrder, quoteResponse):
-    print(datetime.datetime.now().isoformat() + " ##### SellOrderService: Appending ClosedSellOrder to ClosedSwaps.json #####")
-    # First fetch the historical ClosedSwaps from file
-    closedSwapList = fetchClosedSwaps(InitService.getClosedSwapsFileLocation())
-    # Now append new closedSellOrder
-    closedSwapList = addClosedSwapToList(closedSwapList, closedSellOrder)
-    # Now convert from quote entity list to JSON object
-    closedSwapJSON = json.dumps(closedSwapList, ensure_ascii=False, default=lambda o: o.__dict__,
-                           sort_keys=False, indent=4)
-    with open(InitService.getClosedSwapsFileLocation(), 'w+') as json_file:
-        json_file.write(closedSwapJSON + '\n')
-
-def fetchClosedSwaps(filename):
-    if commonService.checkIfFileExists(filename):
-        with open(filename) as json_file:
-            JSONFromFile = json.load(json_file)
-            # create list of quotes from json file
-            closedSwapList = convertToList(JSONFromFile)
-            return closedSwapList
-    else:
-        closedSwapList = []
-        return closedSwapList
-
-# function to add a new closed swap to an existing List of Closed Sell Order Objects
-def addClosedSwapToList(closedSwapList, closedSwap):
-    # append the quote entity object to the quoteList
-    closedSwapList.append(closedSwap)
-    return closedSwapList
 
 
 def placeVirtualSellOrder(swapOrder, tx_hash):
